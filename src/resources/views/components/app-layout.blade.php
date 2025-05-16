@@ -37,14 +37,14 @@
                 {{-- replace the path from "/" to login, register and logout when the routes are working --}}
                 <div class="hidden sm:flex sm:items-center space-x-4">
                     @auth
-                        <form method="POST" action="{{ url('/') }}">
+                        <form method="POST" action="{{ route('logout') }}">
                             @csrf
                             <button class="text-sm text-gray-100 hover:text-gray-300">Log Out</button>
                         </form>
                     @else
-                        <a href="{{ url('/') }}" class="text-sm text-gray-100 hover:text-gray-300">Login</a>
+                        <a href="{{ route('login') }}" class="text-sm text-gray-100 hover:text-gray-300">Login</a>
                         <span class="text-sm text-gray-100">/</span>
-                        <a href="{{ url('/') }}" class="text-sm text-gray-100 hover:text-gray-300">Register</a>
+                        <a href="{{ route('register') }}" class="text-sm text-gray-100 hover:text-gray-300">Register</a>
                     @endauth
                 </div>
 
