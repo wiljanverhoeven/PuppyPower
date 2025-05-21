@@ -1,27 +1,94 @@
 <x-app-layout>
-    <form method="post" action="{{ route('contact.store') }}">
-        @csrf
-        <div>
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required>
+    {{-- import font awesome --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" 
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" 
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
+    {{-- header image --}}
+    <div class="relative h-96">
+        <img src="{{ asset('/images/contact-header.jpg') }}" alt="Header Image" class="w-full h-full object-cover brightness-60">
+        <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-4">
+            <h1 class="text-gray-200 text-4xl font-bold">Neem contact met ons op</h1>
+            <p class="text-gray-200">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+            <button class="bg-gray-600 hover:bg-gray-500 ease-in-out duration-300 w-48 h-12 rounded-xl text-gray-200 mt-6 shadow-md">Meest gestelde vragen</button>
         </div>
-        <div>
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
+    </div>
+    
+        {{-- boxes container --}}
+    <div class="flex flex-row mt-4 justify-center space-x-4 mb-10">
+        {{-- contact info/openingstijden --}}
+        <div class="bg-gray-300 rounded-lg w-80 h-[460px] mt-4 p-4 gap-2">
+            <h2 class="text-xl font-bold">Contact Informatie</h2>
+            <p class="text-gray-700">Telefoon: 123-456-7890</p>
+            <p class="text-gray-700">Email: email@email.com</p>
+            <p class="text-gray-700">Adres: Voorbeeldstraat 123, 1234 AB, Plaatsnaam</p>
+            <h2 class="text-xl font-bold mt-4">Openingstijden</h2>
+            <p class="text-gray-700">Maandag: 09:00 - 17:00</p>
+            <p class="text-gray-700">Dinsdag: 09:00 - 17:00</p>
+            <p class="text-gray-700">Woensdag: 09:00 - 17:00</p>
+            <p class="text-gray-700">Donderdag: 09:00 - 17:00</p>
+            <p class="text-gray-700">Vrijdag: 09:00 - 17:00</p>
+            <p class="text-gray-700">Zaterdag: 10:00 - 16:00</p>
+            <p class="text-gray-700">Zondag: Gesloten</p>
+            <h2 class="text-xl font-bold mt-4">Social Media</h2>
+            {{-- facebook, instagram, X and linkedin icons --}}
+            <div class="flex flex-row gap-4 mt-2">
+                <a href="#" class="text-gray-700 hover:text-blue-600 text-2xl" aria-label="Facebook">
+                    <i class="fab fa-facebook"></i>
+                </a>
+                <a href="#" class="text-gray-700 hover:text-pink-500 text-2xl" aria-label="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="#" class="text-gray-700 hover:text-black text-2xl" aria-label="X">
+                    <i class="fab fa-x-twitter"></i>
+                </a>
+                <a href="#" class="text-gray-700 hover:text-blue-700 text-2xl" aria-label="LinkedIn">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+            </div>
         </div>
-        <div>
-            <label for="phone">Phone:</label>
-            <input type="text" id="phone" name="phone">
-        </div>
-        <div>
-            <label for="subject">Subject:</label>
-            <input type="text" id="subject" name="subject" required>
-        </div>
-        <div>
-            <label for="message">Message:</label>
-            <textarea id="message" name="message" required></textarea>
-        </div>
-        <button type="submit">Send</button>
+        {{-- contact formulier --}}
+        <div class="flex flex-col bg-gray-300 rounded-lg w-[50%] h-[460px] mt-4 p-4 gap-2">
+            <h2 class="text-xl font-bold">Stel je vraag</h2>
+            <form method="post" action="{{ route('contact.store') }}" 
+            class="flex flex-col justify-center">
+                @csrf
+            
+                    <div class="flex flex-row gap-4 w-full">
+                        <div class="flex flex-col w-1/2">
+                            <label for="name">Voornaam:</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="flex flex-col w-1/2">
+                            <label for="lastname">Achternaam:</label>
+                            <input type="text" id="lastname" name="lastname" required>
+                        </div>
 
-    </form>
+                    </div>
+                
+                    <div class="flex flex-row gap-4 w-full">
+                        <div class="flex flex-col w-1/2">
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                    
+                        <div class="flex flex-col w-1/2">
+                            <label for="phone">Phone:</label>
+                            <input type="text" id="phone" name="phone">
+                        </div>
+                    </div>
+                
+                    <label for="subject">Subject:</label>
+                    <input type="text" id="subject" name="subject" required>
+                
+                    <label for="message">Message:</label>
+                    <textarea id="message" name="message" class="h-24" required></textarea>
+                
+                    <div class="flex items-center justify-center">
+                        <button type="submit" class="bg-gray-600 hover:bg-gray-500 ease-in-out duration-300 w-[90%] h-12 rounded-xl text-gray-200 mt-6">Send</button>
+                    </div>
+
+            </form>
+        </div>
+    </div>
+    
 </x-app-layout>
