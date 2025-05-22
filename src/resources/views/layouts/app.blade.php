@@ -27,9 +27,9 @@
                     <a href="{{ url('/') }}" class="text-gray-100 hover:text-gray-300 {{ request()->is('/') ? 'underline' : '' }}">
                         Homepage
                     </a>
-                    {{-- <a href="{{ route('contact') }}" class="text-gray-100 hover:text-gray-300 {{ request()->routeIs('contact') ? 'underline' : '' }}">
-                        Contact
-                    </a> --}}
+                     <a href="{{ route('trainings') }}" class="text-gray-100 hover:text-gray-300 {{ request()->routeIs('contact') ? 'underline' : '' }}">
+                        Trainingen
+                    </a>
                 </div>
             </div>
 

@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 //controllers
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TrainingController;
 
 Route::get('/', function () {
     return view('home');
@@ -22,10 +23,10 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 // Training page routes
-Route::get('/training', function () {
-    return view('training');
-})->name('training');
 
+Route::get ('/training', [TrainingController::class, 'index']) ->name('trainings');
+
+// Auth
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
