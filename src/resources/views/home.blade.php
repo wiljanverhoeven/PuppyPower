@@ -17,7 +17,7 @@
                     <div class="p-4">
                         <h2 class="text-xl font-bold">Shop</h2>
                         <p class="text-gray-700">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                        <a href="#" class="text-blue-500 hover:underline">Naar Shop</a>
+                        <a href="/store" class="text-blue-500 hover:underline">Naar Shop</a>
                     </div>
                 </div>
                 <div class="bg-white shadow-lg rounded-lg overflow-hidden hover:scale-105 transition-transform duration-300">
