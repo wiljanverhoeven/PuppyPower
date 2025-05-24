@@ -5,6 +5,7 @@
             @foreach($trainings as $training )
                 <div class="">
                     <div>{{ $training->name }}</div>
+                    <div>{{ $training->modules_count }}</div>
                 </div>
             @endforeach
         </div>

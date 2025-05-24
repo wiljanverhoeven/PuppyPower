@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Training;
+use App\Models\Module;
 use Illuminate\Http\Request;
 
 class TrainingController extends Controller
@@ -12,7 +13,7 @@ class TrainingController extends Controller
      */
     public function index()
     {
-        $trainings = Training::all();
+        $trainings = Training::withCount('modules')->get();
         return view('training', compact('trainings'));
     }
 

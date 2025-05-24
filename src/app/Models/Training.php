@@ -4,11 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Module;
 
 class Training extends Model
 {
-    /** @use HasFactory<\Database\Factories\TrainingFactory> */
     use HasFactory;
+    protected $primaryKey = 'training_id';
+
 
     protected $fillable = [
         'name',
@@ -17,4 +19,9 @@ class Training extends Model
         'type',
         'price',
     ];
+
+    public function modules()
+    {
+        return $this->hasMany(Module::class, 'training_id', 'training_id');
+    }
 }
