@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Models\Training;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class User extends Authenticatable
 {
@@ -57,4 +59,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(MyTraining::class, 'user_id');
     }
+
+    public function trainings()
+    {
+        return $this->belongsToMany(Training::class, 'mytrainings', 'user_id', 'training_id');
+    }
+
 }
