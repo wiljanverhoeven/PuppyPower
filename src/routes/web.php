@@ -26,6 +26,10 @@ Route::get('/dashboard', function () {
 
 Route::get ('/training', [TrainingController::class, 'index']) ->name('trainings');
 
+// Buy training
+Route::get('/training/{id}/buy', [TrainingController::class, 'buytraining'])->name('buytraining');
+Route::post('/training/{id}/confirm', [TrainingController::class, 'confirmPurchase'])->name('confirmPurchase');
+
 // Auth
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -14,7 +14,9 @@ class TrainingController extends Controller
     public function index()
     {
         $trainings = Training::withCount('modules')->get();
-        return view('training', compact('trainings'));
+        $mytrainings = auth()->user() ? auth()->user()->mytrainings->pluck('training_id') : collect();
+
+        return view('training', compact('trainings', 'mytrainings'));
     }
 
     /**
@@ -63,5 +65,31 @@ class TrainingController extends Controller
     public function destroy(Training $training)
     {
         //
+    }
+
+    /**
+     * Buy and redirect to buy page.
+     */
+    public function buytraining($id)
+    {
+        $training = Training::withCount('modules')->findOrFail($id);
+        return view('buytraining', compact('training'));
+    }
+
+    /**
+     * Confirm purchase and redirect to confirmation page.
+     */
+    public function confirmPurchase(Request $request, $id)
+    {
+
+        $training = Training::findOrFail($id);
+
+        // Save to mytrainings
+        auth()->user()->mytrainings()->create([
+            'training_id' => $training->training_id,
+            'status' => 'open',
+        ]);
+
+        return redirect()->route('trainings')->with('success', 'success');
     }
 }

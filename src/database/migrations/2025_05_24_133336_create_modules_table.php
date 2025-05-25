@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('modules', function (Blueprint $table) {
             $table->id('module_id');
             $table->foreignId('training_id')->constrained('trainings','training_id')->onDelete('cascade');
-            $table->boolean('completed')->default(false);
             $table->string('name');
             $table->text('description')->nullable();
             $table->integer('order')->default(1);
