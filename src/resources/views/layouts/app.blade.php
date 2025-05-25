@@ -30,6 +30,11 @@
                      <a href="{{ route('trainings') }}" class="text-gray-100 hover:text-gray-300 {{ request()->routeIs('contact') ? 'underline' : '' }}">
                         Trainingen
                     </a>
+                    @auth
+                        <a href="{{ route('mytrainings') }}" class="text-gray-100 hover:text-gray-300 {{ request()->routeIs('contact') ? 'underline' : '' }}">
+                            Mijn Trainingen
+                        </a>
+                    @endauth
                 </div>
             </div>
 

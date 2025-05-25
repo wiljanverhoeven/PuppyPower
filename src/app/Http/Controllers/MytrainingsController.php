@@ -12,6 +12,12 @@ class MytrainingsController extends Controller
      */
     public function index()
     {
+        // Redirect if not logged in
+        if (!auth()->check()) {
+            return redirect()->route('login');
+        }
+
+        // Fetch user trainings
         $mytrainings = auth()->user()->trainings;
         return view('mytrainings', compact('mytrainings'));
     }
