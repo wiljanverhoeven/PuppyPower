@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Product;
 use App\Models\User;
 use App\Models\Training;
 use App\Models\Module;
@@ -26,6 +27,8 @@ class DatabaseSeeder extends Seeder
 
         Training::factory(3)->create();
 
+        Product::factory()->count(20)->create();
+
         //pluck all training ids
         $trainingIds = Training::pluck('training_id')->toArray();
 
@@ -34,6 +37,5 @@ class DatabaseSeeder extends Seeder
                 return $trainingIds[array_rand($trainingIds)];
             },
         ]);
-
     }
 }
