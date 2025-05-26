@@ -2,7 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
-//controllers
+use App\Http\Controllers\ProductController;
+
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TrainingController;
@@ -18,6 +19,9 @@ Route::get('/contact', function () {
 
 Route::post('/contact', [ContactController::class, 'store'])
     ->name('contact.store');
+
+Route::get('/store', [ProductController::class, 'index'])->name('store.index');
+Route::get('/store/{product}', [ProductController::class, 'show'])->name('store.show');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
