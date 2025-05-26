@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Schema;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -22,5 +23,6 @@ class AppServiceProvider extends ServiceProvider
     {
         Blade::component('layout.app-layout', \App\View\Components\Layout\AppLayout::class);
         Blade::component('layout.guest-layout', \App\View\Components\Layout\GuestLayout::class);
+        Schema::defaultStringLength(191);
     }
 }
