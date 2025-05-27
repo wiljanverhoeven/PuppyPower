@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Mytraining;
 use Illuminate\Http\Request;
+use App\Models\Module;
+use App\Models\Mymodule;
+use App\Models\Training;
 
 class MytrainingsController extends Controller
 {
@@ -18,7 +21,7 @@ class MytrainingsController extends Controller
         }
 
         // Fetch user trainings
-        $mytrainings = auth()->user()->trainings;
+        $mytrainings = auth()->user()->mytrainings()->with(['training.modules'])->get();
         return view('mytrainings', compact('mytrainings'));
     }
 
@@ -68,5 +71,82 @@ class MytrainingsController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    /**
+     * Start a training session.
+     */
+    public function startTraining($id)
+    {
+        // safeguard if not logged in
+        if (!auth()->check()) {
+            return redirect()->route('login');
+        }
+
+        // safeguard if training isn't bought
+        $training = Mytraining::findOrFail($id);
+
+        if (!auth()->user()->mytrainings->contains($training)) {
+            return redirect()->route('mytrainings')->with('error', 'Not allowed.');
+        }
+
+        // safeguard if module already exists ( AI query )
+        if ($training->status === 'started') {
+            $modules = Mymodule::where('user_id', auth()->id())
+                ->where('mytraining_id', $training->mytraining_id)
+                ->whereHas('module', function ($query) use ($training) {
+                    $query->where('training_id', $training->training_id);
+                })
+                ->get();
+
+            return view('activetraining', [
+                'modules' => $modules,
+            ])->with('success', 'Training already started.');
+        }
+
+        // Fetch and store modules to mymodules
+        $modules = Module::where('training_id', $training->training_id)->get();
+
+        foreach ($modules as $module) {
+            Mymodule::firstOrCreate([
+                'user_id' => auth()->id(),
+                'module_id' => $module->module_id,
+                'mytraining_id' => $training->mytraining_id,
+            ]);
+        }
+
+        // Update training status
+        $training->update(['status' => 'started']);
+
+        // Switch to active training view ( AI query )
+        $modules = Mymodule::where('user_id', auth()->id())
+            ->where('mytraining_id', $training->mytraining_id)
+            ->whereHas('module', function ($query) use ($training) {
+                $query->where('training_id', $training->training_id);
+            })
+            ->get();
+
+        return view('activetraining', [
+            'modules' => $modules,
+        ])->with('success', 'Training already started.');
+    }
+
+    /**
+     * Update the status of a module.
+     */
+    public function updateModuleStatus($id)
+    {
+        $mymodule = Mymodule::findOrFail($id);
+
+        if ($mymodule->user_id !== auth()->id()) {
+            return redirect()->route('mytrainings')->with('error', 'Not allowed.');
+        }
+
+        // Safeguard if module is already completed
+        if ($mymodule->status !== 'completed') {
+            $mymodule->update(['status' => 'completed']);
+        }
+
+        return back()->with('success', 'module done');
     }
 }

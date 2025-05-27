@@ -11,11 +11,12 @@ class Mymodule extends Model
     protected $fillable = [
         'user_id',
         'module_id',
+        'mytraining_id',
         'status',
     ];
 
     public function module()
     {
-        return $this->belongsTo(Module::class, 'module_id', 'mymodule_id');
+        return $this->belongsTo(Module::class, 'module_id', 'module_id');
     }
 }

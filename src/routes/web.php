@@ -38,6 +38,10 @@ Route::post('/training/{id}/confirm', [TrainingController::class, 'confirmPurcha
 // My Trainings dashboard
 Route::get('/mytrainings', [MytrainingsController::class, 'index'])->name('mytrainings');
 
+// My Training Modules
+Route::get('/mytrainings/{id}/activetraining', [MytrainingsController::class, 'startTraining'])->name('mytrainings.startTraining');
+Route::patch('/mymodules/{id}', [MytrainingsController::class, 'updateModuleStatus'])->name('mymodules.update');
+
 // Auth
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

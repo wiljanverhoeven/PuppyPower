@@ -7,10 +7,10 @@
         <div class="flex flex-row justify-around">
             @foreach($mytrainings as $mytraining)
                 <div class="p-4 border rounded-lg">
-                    <h2>{{ $mytraining->name }}</h2>
-                    <p>Aantal modules: {{ $mytraining->modules_count }}</p>
-                    <p>Beschrijving: {{ $mytraining->description }}</p>
-                    <button class="bg-blue-600 p-4 text-white rounded-lg hover:bg-blue-700">
+                    <h2>{{ $mytraining->training->name }}</h2>
+                    <p>Aantal modules: {{ $mytraining->training->modules->count() }}</p>
+                    <p>Beschrijving: {{ $mytraining->training->description }}</p>
+                    <button class="bg-blue-600 p-4 text-white rounded-lg hover:bg-blue-700" onclick="window.location.href='{{ route('mytrainings.startTraining', ['id' => $mytraining->mytraining_id]) }}'">
                         Begin training
                     </button>
                 </div>
