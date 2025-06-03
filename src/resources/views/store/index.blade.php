@@ -46,7 +46,7 @@
                         </div>
                         <div class="flex flex-row justify-between items-center pl-2 pr-2 h-full">
                             <div class="p-2 w-1/2">
-                                <p class="font-bold text-[#FEFAE0]">${{ $product->price }}</p>
+                                <p class="font-bold text-[#FEFAE0]">€{{ $product->price }}</p>
                                 <p class="italic text-sm text-white">{{ $product->category }}</p>
                             </div>
                             <form method="POST" action="" class="w-1/2 flex justify-center">
