@@ -40,7 +40,8 @@ Route::get('/mytrainings', [MytrainingsController::class, 'index'])->name('mytra
 
 // My Training Modules
 Route::get('/mytrainings/{id}/activetraining', [MytrainingsController::class, 'startTraining'])->name('mytrainings.startTraining');
-Route::patch('/mymodules/{id}', [MytrainingsController::class, 'updateModuleStatus'])->name('mymodules.update');
+Route::patch('/mytrainings/{id}/trainingmodule/update', [MytrainingsController::class, 'updateModuleStatus'])->name('mymodules.updateModuleStatus');
+Route::get('/mytrainings/{id}/trainingmodule', [MytrainingsController::class, 'startModule'])->name('mymodules.startModule');
 
 // Auth
 Route::middleware('auth')->group(function () {

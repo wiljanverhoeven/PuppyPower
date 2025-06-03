@@ -142,11 +142,33 @@ class MytrainingsController extends Controller
             return redirect()->route('mytrainings')->with('error', 'Not allowed.');
         }
 
-        // Safeguard if module is already completed
+        // Change module status to completed
         if ($mymodule->status !== 'completed') {
             $mymodule->update(['status' => 'completed']);
         }
 
-        return back()->with('success', 'module done');
+        return redirect()->route('mytrainings.startTraining', $mymodule->mytraining_id)
+            ->with('success', 'Module completed.');
+    }
+
+    /**
+     * Start a module
+     */
+    public function startModule($id)
+    {
+        $mymodule = Mymodule::findOrFail($id);
+
+        if ($mymodule->user_id !== auth()->id()) {
+            return redirect()->route('mytrainings')->with('error', 'Not allowed.');
+        }
+
+        // Change module status to started
+        if ($mymodule->status !== 'completed') {
+            $mymodule->update(['status' => 'started']);
+        }
+
+        return view('trainingmodule', [
+            'mymodule' => $mymodule,
+        ])->with('success', 'Module started.');
     }
 }
