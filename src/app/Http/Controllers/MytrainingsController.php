@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Module;
 use App\Models\Mymodule;
 use App\Models\Training;
+use App\Models\Media;
 
 class MytrainingsController extends Controller
 {
@@ -167,8 +168,19 @@ class MytrainingsController extends Controller
             $mymodule->update(['status' => 'started']);
         }
 
+        // Fetch all media for the module
+        $module = $mymodule->module;
+
+        // Safeguard if module is not found
+        if (!$module) {
+            return redirect()->route('mytrainings')->with('error', 'Module not found.');
+        }
+
+        $medias = $module->media()->orderBy('order')->get();
+
         return view('trainingmodule', [
             'mymodule' => $mymodule,
+            'medias' => $medias,
         ])->with('success', 'Module started.');
     }
 }

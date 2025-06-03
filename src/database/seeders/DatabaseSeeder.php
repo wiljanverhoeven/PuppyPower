@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Media;
 use App\Models\Product;
 use App\Models\User;
 use App\Models\Training;
@@ -32,9 +33,18 @@ class DatabaseSeeder extends Seeder
         //pluck all training ids
         $trainingIds = Training::pluck('training_id')->toArray();
 
-        Module::factory(7)->create([
+        Module::factory(12)->create([
             'training_id' => function () use ($trainingIds) {
                 return $trainingIds[array_rand($trainingIds)];
+            },
+        ]);
+
+        // Pluck all module ids
+        $moduleIds = Module::pluck('module_id')->toArray();
+
+        Media::factory(30)->create([
+            'module_id' => function () use ($moduleIds) {
+                return $moduleIds[array_rand($moduleIds)];
             },
         ]);
     }

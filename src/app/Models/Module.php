@@ -20,4 +20,9 @@ class Module extends Model
     {
         return $this->belongsTo(Training::class);
     }
+
+    public function media()
+    {
+        return $this->hasMany(Media::class, 'module_id', 'module_id');
+    }
 }
