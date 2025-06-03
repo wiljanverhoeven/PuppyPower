@@ -31,22 +31,30 @@
             <div class="flex-1 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
                 @foreach($products as $product)
                     <div class="bg-[#606C38] rounded-lg overflow-hidden shadow-lg p-2 h-96 flex flex-col justify-between hover:scale-105 transition-transform duration-300">
-                        <div class="bg-[#606C38]">
+                        <div class="">
                             <img src="{{ asset('/images/placeholder.jpg') }}" alt="shop Image" class="w-full rounded-lg h-48 object-cover">
                         </div>
                         <div class="p-2">
-                            <h2 class="text-lg text-[#FEFAE0] font-semibold mb-2">
+                            <h2 class="w-fit text-lg text-[#FEFAE0] font-semibold mb-2 hover:text-[#DDA15E] transition">
                                 <a href="{{ route('store.show', $product) }}">
                                     {{ $product->name }}
                                 </a>
                             </h2>
-                            <p class="text-sm text-white mb-2">
+                            <p class="text-sm text-white mb-2 h-12 text-ellipsis">
                                 {{ Str::limit($product->description, 100) }}
                             </p>
                         </div>
-                        <div class="p-2">
-                            <p class="font-bold text-[#FEFAE0]">${{ $product->price }}</p>
-                            <p class="italic text-sm text-white">{{ $product->category }}</p>
+                        <div class="flex flex-row justify-between items-center pl-2 pr-2 h-full">
+                            <div class="p-2 w-1/2">
+                                <p class="font-bold text-[#FEFAE0]">${{ $product->price }}</p>
+                                <p class="italic text-sm text-white">{{ $product->category }}</p>
+                            </div>
+                            <form method="POST" action="" class="w-1/2 flex justify-center">
+                                @csrf
+                                <button type="submit" class="w-32 h-12 bg-[#DDA15E] hover:bg-[#BC6C25] text-[#FEFAE0] py-2 rounded-md transition">
+                                    <i class="fa-solid fa-cart-plus text-xl"></i>
+                                </button>
+                            </form>
                         </div>
                     </div>
                 @endforeach
