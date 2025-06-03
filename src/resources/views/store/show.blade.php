@@ -10,7 +10,7 @@
             {{-- product details --}}
             <div>
                 <h1 class="text-xl font-bold">{{ $product->name }}</h1>
-                <p class="text-[#DDA15E]">Categorie: {{ $product->category }}</p>
+                <p class="text-[#DDA15E] text-sm">Categorie: {{ $product->category }}</p>
             </div>
             <p class="text-lg font-bold">${{ $product->price }}</p>
 
