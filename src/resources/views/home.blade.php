@@ -12,28 +12,28 @@
         {{-- cards --}}
         <div class="container mx-auto p-8 border-b-2 border-gray-300">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="bg-white shadow-lg rounded-lg overflow-hidden hover:scale-105 transition-transform duration-300">
+                <div class="bg-[#606C38] shadow-lg rounded-lg overflow-hidden hover:scale-105 transition-transform duration-300">
                     <img src="{{ asset('/images/placeholder.jpg') }}" alt="shop Image" class="w-full h-48 object-cover">
                     <div class="p-4">
-                        <h2 class="text-xl font-bold">Shop</h2>
-                        <p class="text-gray-700">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                        <a href="/store" class="text-blue-500 hover:underline">Naar Shop</a>
+                        <h2 class="text-xl text-[#FEFAE0] font-bold">Shop</h2>
+                        <p class="text-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        <a href="{{route('store.index')}}" class="text-[#DDA15E] hover:text-[#BC6C25] transition-all duration-150">Naar Shop >></a>
                     </div>
                 </div>
-                <div class="bg-white shadow-lg rounded-lg overflow-hidden hover:scale-105 transition-transform duration-300">
+                <div class="bg-[#606C38] shadow-lg rounded-lg overflow-hidden hover:scale-105 transition-transform duration-300">
                     <img src="{{ asset('/images/placeholder.jpg') }}" alt="training Image" class="w-full h-48 object-cover">
                     <div class="p-4">
-                        <h2 class="text-xl font-bold">Training</h2>
-                        <p class="text-gray-700">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                        <a href="#" class="text-blue-500 hover:underline">Naar Training</a>
+                        <h2 class="text-xl text-[#FEFAE0] font-bold">Training</h2>
+                        <p class="text-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        <a href="#" class="text-[#DDA15E] hover:text-[#BC6C25] transition-all duration-150">Naar Training >></a>
                     </div>
                 </div>
-                <div class="bg-white shadow-lg rounded-lg overflow-hidden hover:scale-105 transition-transform duration-300">
+                <div class="bg-[#606C38] shadow-lg rounded-lg overflow-hidden hover:scale-105 transition-transform duration-300">
                     <img src="{{ asset('/images/placeholder.jpg') }}" alt="dagopvang Image" class="w-full h-48 object-cover">
                     <div class="p-4">
-                        <h2 class="text-xl font-bold">Dagopvang</h2>
-                        <p class="text-gray-700">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                        <a href="#" class="text-blue-500 hover:underline">Naar Dagopvang</a>
+                        <h2 class="text-xl text-[#FEFAE0] font-bold">Dagopvang</h2>
+                        <p class="text-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        <a href="#" class="text-[#DDA15E] hover:text-[#BC6C25] transition-all duration-150">Naar Dagopvang >></a>
                     </div>
                 </div>
             </div>
