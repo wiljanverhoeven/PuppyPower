@@ -8,10 +8,11 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TrainingController;
 use App\Http\Controllers\MytrainingsController;
+use App\Http\Controllers\AdminController;
 
 Route::get('/', function () {
     return view('home');
-});
+})->name('home');
 // Contact form routes
 Route::get('/contact', function () {
     return view('contact');
@@ -28,7 +29,6 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 // Training page routes
-
 Route::get ('/training', [TrainingController::class, 'index']) ->name('trainings');
 
 // Buy training
@@ -42,6 +42,9 @@ Route::get('/mytrainings', [MytrainingsController::class, 'index'])->name('mytra
 Route::get('/mytrainings/{id}/activetraining', [MytrainingsController::class, 'startTraining'])->name('mytrainings.startTraining');
 Route::patch('/mytrainings/{id}/trainingmodule/update', [MytrainingsController::class, 'updateModuleStatus'])->name('mymodules.updateModuleStatus');
 Route::get('/mytrainings/{id}/trainingmodule', [MytrainingsController::class, 'startModule'])->name('mymodules.startModule');
+
+// Admin routing
+Route::get('/admin', [AdminController::class, 'index'])->name('admin');
 
 // Auth
 Route::middleware('auth')->group(function () {

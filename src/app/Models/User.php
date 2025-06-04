@@ -24,6 +24,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
     ];
 
     /**
@@ -46,6 +47,7 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'role' => 'string',
         ];
     }
 
@@ -63,6 +65,14 @@ class User extends Authenticatable
     public function trainings()
     {
         return $this->belongsToMany(Training::class, 'mytrainings', 'user_id', 'training_id');
+    }
+
+    /**
+     * Check if the user has admin role
+     */
+    public function isAdmin(): bool
+    {
+        return $this->role === 'admin';
     }
 
 }
