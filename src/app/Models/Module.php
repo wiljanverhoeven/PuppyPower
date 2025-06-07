@@ -9,6 +9,8 @@ use App\Models\Training;
 class Module extends Model
 {
     use HasFactory;
+    protected $primaryKey = 'module_id';
+
     protected $fillable = [
         'name',
         'description',

@@ -17,9 +17,9 @@
             </div>
             <div class="py-2">
                 <div>Aantal modules: {{ $training->modules_count }}</div>
-{{--                <div>--}}
-{{--                    <a href="{{ route('modules.index', $training) }}">Bekijk modules</a>--}}
-{{--                </div>--}}
+                <div>
+                    <a href="{{ route('trainings.modules.index', $training) }}">Bekijk modules</a>
+                </div>
             </div>
         </div>
     @endforeach
