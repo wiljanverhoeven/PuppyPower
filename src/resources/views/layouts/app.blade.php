@@ -4,10 +4,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    
+
     {{-- import font awesome --}}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" 
-      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
       crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <title>{{ config('app.name', 'Laravel') }}</title>
@@ -39,9 +39,15 @@
                         Trainingen
                     </a>
                     @auth
+                        @if (auth()->user()->role !== 'admin')
                         <a href="{{ route('mytrainings') }}" class="hover:text-[#E8E0C8] transition-all duration-150 {{ request()->routeIs('mytrainings') ? 'underline' : '' }}">
                             Mijn Trainingen
                         </a>
+                        @else
+                        <a href="{{ route('admin') }}" class="hover:text-[#E8E0C8] transition-all duration-150 {{ request()->routeIs('mytrainings') ? 'underline' : '' }}">
+                            Admin dashboard
+                        </a>
+                        @endif
                     @endauth
                 </div>
             </div>

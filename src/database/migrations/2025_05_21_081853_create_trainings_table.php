@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id('training_id');
             $table->string('name');
             $table->string('description');
-            $table->date('date');
+            $table->date('date')->nullable();
             $table->string('type');
             $table->decimal('price');
             $table->timestamps();

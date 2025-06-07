@@ -9,6 +9,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TrainingController;
 use App\Http\Controllers\MytrainingsController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Admin\TrainingController as AdminTrainingController;
 
 Route::get('/', function () {
     return view('home');
@@ -45,6 +46,12 @@ Route::get('/mytrainings/{id}/trainingmodule', [MytrainingsController::class, 's
 
 // Admin routing
 Route::get('/admin', [AdminController::class, 'index'])->name('admin');
+
+// Admin Training routes
+Route::prefix('admin')->group(function () {
+    Route::resource('trainings', AdminTrainingController::class);
+});
+
 
 // Auth
 Route::middleware('auth')->group(function () {
