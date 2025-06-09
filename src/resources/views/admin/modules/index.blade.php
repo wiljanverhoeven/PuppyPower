@@ -15,6 +15,11 @@
                         <button type="submit">Delete</button>
                     </form>
                     <p><strong>Aantal media:</strong> {{ $module->medias_count }}</p>
+                    <div class="py-2">
+                        <a href="{{ route('trainings.modules.media.index', [$training, $module]) }}" class="btn btn-primary">
+                            Bekijk media
+                        </a>
+                    </div>
                 </div>
             @endforeach
         </div>
@@ -23,7 +28,7 @@
     @endif
     <div class="py-4">
         <div>Maak een nieuw module</div>
-        <a href="{{ route('trainings.modules.create', [$training, $module]) }}">Nieuw</a>
+        <a href="{{ route('trainings.modules.create', [$training]) }}">Nieuw</a>
     </div>
 </x-app-layout>
 

@@ -11,6 +11,7 @@ use App\Http\Controllers\MytrainingsController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Admin\TrainingController as AdminTrainingController;
 use App\Http\Controllers\Admin\ModuleController as AdminModuleController;
+use App\Http\Controllers\Admin\MediaController as AdminMediaController;
 
 Route::get('/', function () {
     return view('home');
@@ -52,6 +53,7 @@ Route::get('/admin', [AdminController::class, 'index'])->name('admin');
 Route::prefix('admin')->group(function () {
     Route::resource('trainings', AdminTrainingController::class);
     Route::resource('trainings.modules', AdminModuleController::class);
+    Route::resource('trainings.modules.media', AdminMediaController::class);
 });
 
 

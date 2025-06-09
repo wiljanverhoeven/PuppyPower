@@ -11,10 +11,12 @@ class Media extends Model
     use HasFactory;
 
     protected $primaryKey = 'media_id';
+
     protected $fillable = [
         'title',
         'path',
         'description',
+        'order',
     ];
 
     public function module()
