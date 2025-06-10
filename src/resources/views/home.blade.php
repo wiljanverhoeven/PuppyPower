@@ -44,28 +44,43 @@
         {{-- cards --}}
         <div class="container mx-auto p-8 border-b-2 border-gray-300">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="bg-[#606C38] shadow-lg rounded-lg overflow-hidden hover:scale-105 transition-transform duration-300">
-                    <img src="{{ asset('/images/placeholder.jpg') }}" alt="shop Image" class="w-full h-48 object-cover">
-                    <div class="p-4">
-                        <h2 class="text-xl text-[#FEFAE0] font-bold">Shop</h2>
+                {{-- webshop card --}}
+                <div class="bg-[#606C38] shadow-lg rounded-lg overflow-hidden p-3 hover:scale-105 transition-transform duration-300">
+                    <div>
+                        <img src="{{ asset('/images/placeholder.jpg') }}" alt="shop Image" class="w-full h-48 object-cover rounded-lg">
+                    </div>
+                    <div class="mt-2 flex flex-col gap-2">
+                        <h2 class="text-xl text-[#FEFAE0] font-bold">Webshop</h2>
                         <p class="text-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                        <a href="{{route('store.index')}}" class="text-[#DDA15E] hover:text-[#BC6C25] transition-all duration-150">Naar Shop >></a>
+                        <button class="bg-[#DDA15E] hover:bg-[#BC6C25] text-[#FEFAE0] w-full py-2 rounded-md transition-all ease-in-out">
+                            <a href="{{route('store.index')}}" class="flex flex-wrap justify-center items-center text-center gap-2">Naar Webshop <i class="fa-solid fa-circle-arrow-right"></i></a>
+                        </button>
                     </div>
                 </div>
-                <div class="bg-[#606C38] shadow-lg rounded-lg overflow-hidden hover:scale-105 transition-transform duration-300">
-                    <img src="{{ asset('/images/placeholder.jpg') }}" alt="training Image" class="w-full h-48 object-cover">
-                    <div class="p-4">
-                        <h2 class="text-xl text-[#FEFAE0] font-bold">Training</h2>
+                {{-- training card --}}
+                <div class="bg-[#606C38] shadow-lg rounded-lg overflow-hidden p-3 hover:scale-105 transition-transform duration-300">
+                    <div>
+                        <img src="{{ asset('/images/placeholder.jpg') }}" alt="shop Image" class="w-full h-48 object-cover rounded-lg">
+                    </div>
+                    <div class="mt-2 flex flex-col gap-2">
+                        <h2 class="text-xl text-[#FEFAE0] font-bold">Trainingen</h2>
                         <p class="text-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                        <a href="#" class="text-[#DDA15E] hover:text-[#BC6C25] transition-all duration-150">Naar Training >></a>
+                        <button class="bg-[#DDA15E] hover:bg-[#BC6C25] text-[#FEFAE0] w-full py-2 rounded-md transition-all ease-in-out">
+                            <a href="{{route('store.index')}}" class="flex flex-wrap justify-center items-center text-center gap-2">Naar Trainingen <i class="fa-solid fa-circle-arrow-right"></i></a>
+                        </button>
                     </div>
                 </div>
-                <div class="bg-[#606C38] shadow-lg rounded-lg overflow-hidden hover:scale-105 transition-transform duration-300">
-                    <img src="{{ asset('/images/placeholder.jpg') }}" alt="dagopvang Image" class="w-full h-48 object-cover">
-                    <div class="p-4">
+                {{-- dagopvang card --}}
+                <div class="bg-[#606C38] shadow-lg rounded-lg overflow-hidden p-3 hover:scale-105 transition-transform duration-300">
+                    <div>
+                        <img src="{{ asset('/images/placeholder.jpg') }}" alt="shop Image" class="w-full h-48 object-cover rounded-lg">
+                    </div>
+                    <div class="mt-2 flex flex-col gap-2">
                         <h2 class="text-xl text-[#FEFAE0] font-bold">Dagopvang</h2>
                         <p class="text-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                        <a href="#" class="text-[#DDA15E] hover:text-[#BC6C25] transition-all duration-150">Naar Dagopvang >></a>
+                        <button class="bg-[#DDA15E] hover:bg-[#BC6C25] text-[#FEFAE0] w-full py-2 rounded-md transition-all ease-in-out">
+                            <a href="{{route('store.index')}}" class="flex flex-wrap justify-center items-center text-center gap-2">Naar Dagopvang <i class="fa-solid fa-circle-arrow-right"></i></a>
+                        </button>
                     </div>
                 </div>
             </div>
