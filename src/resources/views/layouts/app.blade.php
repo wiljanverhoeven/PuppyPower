@@ -25,7 +25,12 @@
         <div class="flex justify-between h-16">
             <!-- Logo + Nav Links -->
             <div class="flex items-center space-x-6">
-                <a href="{{ url('/') }}" class="text-xl font-bold ">Logo</a>
+                {{-- <a href="{{ url('/') }}" class="text-xl font-bold ">Logo</a> --}}
+                <div>
+                    <a href="{{ url('/') }}" class="text-xl font-bold ">
+                        <img src="{{ asset('images/logo.svg') }}" alt="" class="h-20 fill-[#E8E0C8] w-auto">
+                    </a>
+                </div>
 
                 <!-- Desktop Links -->
                 <div class="hidden sm:flex space-x-4">
