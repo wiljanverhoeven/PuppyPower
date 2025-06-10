@@ -26,7 +26,17 @@
                     Filter
                 </button>
             </form>
-
+            @if(session('order_success'))
+                <div class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-60 flex items-center justify-center z-50">
+                    <div class="bg-[#FEFAE0] p-6 rounded-lg text-center shadow-lg max-w-md w-full">
+                        <h2 class="text-xl font-bold mb-4 text-[#606C38]">Bestelling geplaatst!</h2>
+                        <p class="mb-6 text-[#606C38]">Bedankt voor je aankoop.</p>
+                        <a href="{{ route('store.index') }}" class="bg-[#DDA15E] hover:bg-[#BC6C25] text-[#FEFAE0] px-4 py-2 rounded-md transition">
+                            Terug naar de webshop
+                        </a>
+                    </div>
+                </div>
+            @endif
             {{-- Product Grid --}}
             <div class="flex-1 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
                 @foreach($products as $product)
@@ -49,12 +59,14 @@
                                 <p class="font-bold text-[#FEFAE0]">€{{ $product->price }}</p>
                                 <p class="italic text-sm text-white">{{ $product->category }}</p>
                             </div>
-                            <form method="POST" action="" class="w-1/2 flex justify-center">
+                            <form method="POST" action="{{ route('cart.add', $product) }}" class="w-1/2 flex justify-center">
                                 @csrf
+                                <input type="hidden" name="min_aantal" value="1">
                                 <button type="submit" class="w-32 h-12 bg-[#DDA15E] hover:bg-[#BC6C25] text-[#FEFAE0] py-2 rounded-md transition">
                                     <i class="fa-solid fa-cart-plus text-xl"></i>
                                 </button>
                             </form>
+
                         </div>
                     </div>
                 @endforeach

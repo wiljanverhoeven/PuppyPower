@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TrainingController;
 use App\Http\Controllers\MytrainingsController;
@@ -26,6 +27,10 @@ Route::post('/contact', [ContactController::class, 'store'])
 
 Route::get('/store', [ProductController::class, 'index'])->name('store.index');
 Route::get('/store/{product}', [ProductController::class, 'show'])->name('store.show');
+
+Route::post('/cart/add/{product}', [CartController::class, 'add'])->name('cart.add');
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+Route::post('/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
