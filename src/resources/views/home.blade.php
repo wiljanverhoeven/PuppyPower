@@ -18,7 +18,7 @@
                 </div>
             </div>
             
-            <!-- Slides container -->
+            {{-- slides container --}}
             <div class="slider-container relative h-full w-full overflow-hidden rounded-xl">
                 <div class="slider-track flex h-full w-full transition-transform duration-1000 ease-in-out">
                     <div class="slide flex-shrink-0 w-full h-full">
@@ -32,7 +32,7 @@
                     </div>
                 </div>
                 
-                <!-- Navigation dots -->
+                {{-- navigatie dots --}}
                 <div class="absolute bottom-4 left-0 right-0 flex justify-center space-x-2 z-20">
                     <button class="slide-dot w-3 h-3 rounded-full bg-white transition-all duration-300" data-slide="0" aria-label="Go to slide 1"></button>
                     <button class="slide-dot w-3 h-3 rounded-full bg-white/50 transition-all duration-300" data-slide="1" aria-label="Go to slide 2"></button>
@@ -120,8 +120,8 @@
         </div>
 
         {{-- over ons --}}
-        <div>
-            <div class="container mx-auto p-8 w-[70%]">
+        <div class="flex flex-col lg:flex-row w-full justify-center items-center gap-16 p-8">
+            <div class="container w-[70%] lg:w-[50%]">
                 <h2 class="text-3xl font-bold text-center mb-4">Over Ons</h2>
                 <p class="text-gray-700 text-center">
                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ut quam condimentum, scelerisque risus vel, imperdiet neque. Donec at maximus tellus, eget lobortis nibh. Sed sit amet eros mauris. Integer ac interdum turpis. Nullam at porta purus, id facilisis nisl. Sed ac pellentesque risus, vitae aliquet ex. Aliquam eget porta nulla. Donec placerat sapien a metus laoreet feugiat. In hac habitasse platea dictumst.
@@ -130,6 +130,9 @@ Nunc leo erat, convallis nec imperdiet vitae, dapibus id mi. Morbi lacinia ullam
 
 In est arcu, viverra non nisl eget, euismod tincidunt leo. Suspendisse laoreet iaculis commodo. Vivamus posuere felis nec neque ultrices efficitur. Etiam scelerisque luctus neque eget porta. Curabitur ac varius justo, quis egestas metus. Ut aliquet felis quam, sit amet commodo ligula laoreet et. Quisque finibus faucibus arcu, sit amet vulputate elit pulvinar quis. Nullam tincidunt libero sagittis nunc accumsan, at lacinia erat semper. 
                 </p>
+            </div>
+            <div class="w-[50%] lg:w-[30%] h-full">
+                <img src="{{ asset('/images/header/puppy-9.jpg') }}" alt="Over Ons" class="w-full h-full object-cover rounded-lg shadow-md">
             </div>
         </div>
     </div>
