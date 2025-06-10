@@ -70,6 +70,54 @@
                 </div>
             </div>
         </div>
+        {{-- foto gallerij --}}
+        <div class="container mx-auto p-8 border-b-2 border-gray-300">
+            {{-- tietel --}}
+            <div class="text-center mb-4">
+                    <h2 class="text-3xl font-bold">Onze Pups</h2>
+                    <p>Zie meer foto's van onze schattige pups op 
+                        <a href="" class="text-pink-500 hover:underline">Instagram</a>!
+                    </p>
+            </div>
+
+            {{-- pictures from instagram --}}
+            <div class="relative h-screen p-8">
+                
+                {{-- upper row --}}
+                <div class="h-1/3 flex justify-between items-center gap-2 mb-2">
+                    <div class="h-full w-2/3 hover:scale-[102%] transition-transform duration-300 hover:cursor-pointer">
+                        <img src="{{ asset('images/header/puppy-5.jpg') }}" alt="Header Image" class="w-full h-full object-cover rounded-lg shadow-md">
+                    </div>
+                    <div class="h-full w-1/3 hover:scale-[102%] transition-transform duration-300 hover:cursor-pointer">
+                        <img src="{{ asset('images/header/puppy-2.jpg') }}" alt="Header Image" class="w-full h-full object-cover rounded-lg shadow-md">
+                    </div>
+                </div>
+                {{-- middle row --}}
+                <div class="h-1/3 flex justify-between items-center gap-2 mb-2">
+                    <div class="h-full w-1/4 hover:scale-[102%] transition-transform duration-300 hover:cursor-pointer">
+                        <img src="{{ asset('images/header/puppy-7.jpg') }}" alt="Header Image" class="w-full h-full object-cover rounded-lg shadow-md">
+                    </div>
+                    <div class="h-full w-1/4 hover:scale-[102%] transition-transform duration-300 hover:cursor-pointer">
+                        <img src="{{ asset('images/header/puppy-3.jpg') }}" alt="Header Image" class="w-full h-full object-cover rounded-lg shadow-md">
+                    </div>
+                    <div class="h-full w-1/4 hover:scale-[102%] transition-transform duration-300 hover:cursor-pointer">
+                        <img src="{{ asset('images/header/puppy-4.jpg') }}" alt="Header Image" class="w-full h-full object-cover rounded-lg shadow-md">
+                    </div>
+                    <div class="h-full w-1/4 hover:scale-[102%] transition-transform duration-300 hover:cursor-pointer">
+                        <img src="{{ asset('images/header/puppy-1.jpg') }}" alt="Header Image" class="w-full h-full object-cover rounded-lg shadow-md">
+                    </div>
+                </div>
+                {{-- bottom row --}}
+                <div class="h-1/3 flex justify-between items-center gap-2">
+                    <div class="h-full w-1/3 hover:scale-[102%] transition-transform duration-300 hover:cursor-pointer">
+                        <img src="{{ asset('images/header/puppy-6.jpg') }}" alt="Header Image" class="w-full h-full object-cover rounded-lg shadow-md">
+                    </div>
+                    <div class="h-full w-2/3 hover:scale-[102%] transition-transform duration-300 hover:cursor-pointer">
+                        <img src="{{ asset('images/header/puppy-8.jpg') }}" alt="Header Image" class="w-full h-full object-cover rounded-lg shadow-md">
+                    </div>
+                </div>
+            </div>
+        </div>
 
         {{-- over ons --}}
         <div>
@@ -82,43 +130,6 @@ Nunc leo erat, convallis nec imperdiet vitae, dapibus id mi. Morbi lacinia ullam
 
 In est arcu, viverra non nisl eget, euismod tincidunt leo. Suspendisse laoreet iaculis commodo. Vivamus posuere felis nec neque ultrices efficitur. Etiam scelerisque luctus neque eget porta. Curabitur ac varius justo, quis egestas metus. Ut aliquet felis quam, sit amet commodo ligula laoreet et. Quisque finibus faucibus arcu, sit amet vulputate elit pulvinar quis. Nullam tincidunt libero sagittis nunc accumsan, at lacinia erat semper. 
                 </p>
-            </div>
-        </div>
-        
-        {{-- pictures from instagram --}}
-        <div class="relative h-screen p-8">
-            {{-- upper row --}}
-            <div class="h-1/3 flex justify-between items-center gap-2 mb-2">
-                <div class="h-full w-2/3">
-                    <img src="{{ asset('images/header/puppy-5.jpg') }}" alt="Header Image" class="w-full h-full object-cover rounded-lg shadow-md">
-                </div>
-                <div class="h-full w-1/3">
-                    <img src="{{ asset('images/header/puppy-2.jpg') }}" alt="Header Image" class="w-full h-full object-cover rounded-lg shadow-md">
-                </div>
-            </div>
-            {{-- middle row --}}
-            <div class="h-1/3 flex justify-between items-center gap-2 mb-2">
-                <div class="h-full w-1/4">
-                    <img src="{{ asset('images/header/puppy-7.jpg') }}" alt="Header Image" class="w-full h-full object-cover rounded-lg shadow-md">
-                </div>
-                <div class="h-full w-1/4">
-                    <img src="{{ asset('images/header/puppy-3.jpg') }}" alt="Header Image" class="w-full h-full object-cover rounded-lg shadow-md">
-                </div>
-                <div class="h-full w-1/4">
-                    <img src="{{ asset('images/header/puppy-4.jpg') }}" alt="Header Image" class="w-full h-full object-cover rounded-lg shadow-md">
-                </div>
-                <div class="h-full w-1/4">
-                    <img src="{{ asset('images/header/puppy-1.jpg') }}" alt="Header Image" class="w-full h-full object-cover rounded-lg shadow-md">
-                </div>
-            </div>
-            {{-- bottom row --}}
-            <div class="h-1/3 flex justify-between items-center gap-2">
-                <div class="h-full w-1/3">
-                    <img src="{{ asset('images/header/puppy-6.jpg') }}" alt="Header Image" class="w-full h-full object-cover rounded-lg shadow-md">
-                </div>
-                <div class="h-full w-2/3">
-                    <img src="{{ asset('images/header/puppy-8.jpg') }}" alt="Header Image" class="w-full h-full object-cover rounded-lg shadow-md">
-                </div>
             </div>
         </div>
     </div>
