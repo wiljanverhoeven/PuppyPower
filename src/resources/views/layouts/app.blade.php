@@ -38,6 +38,10 @@
                      <a href="{{ route('trainings') }}" class="hover:text-[#E8E0C8] transition-all duration-150 {{ request()->routeIs('trainings') ? 'underline' : '' }}">
                         Trainingen
                     </a>
+                    <a href="{{ route('cart.index') }}"{{ request()->routeIs('cart.index') ? 'underline' : '' }}">
+                    Winkelwagen
+                    </a>
+
                     @auth
                         @if (auth()->user()->role !== 'admin')
                         <a href="{{ route('mytrainings') }}" class="hover:text-[#E8E0C8] transition-all duration-150 {{ request()->routeIs('mytrainings') ? 'underline' : '' }}">
