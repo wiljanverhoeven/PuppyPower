@@ -18,7 +18,7 @@
                 </div>
                 <p class="text-xl md:text-2xl font-bold">€{{ $product->price }}</p>
 
-                <form method="POST" action="" class="w-full">
+                <form method="POST" action="{{ route('cart.add', $product) }}" class="w-full">
                     @csrf
                     <div class="flex flex-col sm:flex-row gap-4 mb-4">
                         <input type="number" name="min_aantal" placeholder="Minimum aantal" 
