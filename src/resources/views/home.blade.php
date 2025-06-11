@@ -2,18 +2,18 @@
     <div class="">
         {{-- Image Slideshow with Slide Animation --}}
         <div class="relative h-[calc(100vh-4rem)] overflow-hidden p-8">
-            <div class="absolute inset-0 z-10 flex flex-col items-start justify-center p-14">
-                <h1 class="text-gray-100 text-7xl font-bold w-[50%]">Welkom bij Puppy Power Academy</h1>
-                <p class="text-gray-100 w-[30%]">
+            <div class="absolute inset-0 z-10 flex flex-col text-center lg:text-start items-center lg:items-start justify-center p-14">
+                <h1 class="text-gray-100 text-5xl sm:text-7xl font-bold w-[70%] lg:w-[50%]">Welkom bij Puppy Power Academy</h1>
+                <p class="text-gray-100 w-[70%] lg:w-[30%]">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. scelerisque risus vel, imperdiet neque.
                 </p>
                 {{-- buttons to contact and trainings --}}
-                <div class="mt-4 flex flex-row gap-2 w-[30%]">
-                    <button class="w-2/3 bg-[#DDA15E] hover:bg-[#BC6C25] text-[#FEFAE0] py-2 rounded-md transition">
-                        <a href="{{ url('/contact') }}">Neem contact op <i class="fa-solid fa-paper-plane"></i></a>
+                <div class="mt-4 flex flex-col items-center sm:flex-row sm:items-start gap-2 w-full sm:w-[60%] lg:w-[35%]">
+                    <button class="w-2/3 bg-[#DDA15E] hover:bg-[#BC6C25] text-[#FEFAE0] py-2 rounded-md shadow-md transition-all ease-in-out">
+                        <a href="{{ url('/contact') }}" class="flex flex-wrap justify-center items-center text-center gap-2">Neem contact op <i class="fa-solid fa-paper-plane"></i></a>
                     </button>
-                    <button class="w-2/3 bg-[#DDA15E] hover:bg-[#BC6C25] text-[#FEFAE0] py-2 rounded-md transition">
-                        <a href="{{ url('/contact') }}">Meer over ons <i class="fa-solid fa-circle-info"></i></a>
+                    <button class="w-2/3 bg-[#DDA15E] hover:bg-[#BC6C25] text-[#FEFAE0] py-2 rounded-md shadow-md transition-all ease-in-out">
+                        <a href="{{ url('/contact') }}" class="flex flex-wrap justify-center items-center text-center gap-2">Meer over ons <i class="fa-solid fa-circle-info"></i></a>
                     </button>
                 </div>
             </div>
@@ -42,8 +42,8 @@
         </div>
 
         {{-- cards --}}
-        <div class="container mx-auto p-8 border-b-2 border-gray-300">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="container mx-auto p-8 border-b-2 border-[#f4dfc7]">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 {{-- webshop card --}}
                 <div class="bg-[#606C38] shadow-lg rounded-lg overflow-hidden p-3 hover:scale-105 transition-transform duration-300">
                     <div>
@@ -86,7 +86,7 @@
             </div>
         </div>
         {{-- foto gallerij --}}
-        <div class="container mx-auto p-8 border-b-2 border-gray-300">
+        <div class="container mx-auto p-8 border-b-2 border-[#f4dfc7]">
             {{-- tietel --}}
             <div class="text-center mb-4">
                     <h2 class="text-3xl font-bold">Onze Pups</h2>
