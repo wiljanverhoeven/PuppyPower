@@ -32,7 +32,7 @@
                     </div>
                 </div>
                 
-                {{-- navigatie dots --}}
+                {{-- navigation dots --}}
                 <div class="absolute bottom-4 left-0 right-0 flex justify-center space-x-2 z-20">
                     <button class="slide-dot w-3 h-3 rounded-full bg-white transition-all duration-300" data-slide="0" aria-label="Go to slide 1"></button>
                     <button class="slide-dot w-3 h-3 rounded-full bg-white/50 transition-all duration-300" data-slide="1" aria-label="Go to slide 2"></button>
@@ -85,9 +85,9 @@
                 </div>
             </div>
         </div>
-        {{-- foto gallerij --}}
+        {{-- photo gallery --}}
         <div class="container mx-auto p-8 border-b-2 border-[#f4dfc7]">
-            {{-- tietel --}}
+            {{-- title --}}
             <div class="text-center mb-4">
                     <h2 class="text-3xl font-bold">Onze Pups</h2>
                     <p>Zie meer foto's van onze schattige pups op 
@@ -100,37 +100,57 @@
                 
                 {{-- upper row --}}
                 <div class="h-1/3 flex justify-between items-center gap-2 mb-2">
-                    <div class="h-full w-2/3 hover:scale-[102%] transition-transform duration-300 hover:cursor-pointer">
+                    <div class="h-full w-2/3 hover:scale-[102%] transition-transform duration-300 hover:cursor-pointer"
+                        onclick="openModal('{{ asset('images/header/puppy-5.jpg') }}', 'Puppy 5')">
                         <img src="{{ asset('images/header/puppy-5.jpg') }}" alt="Header Image" class="w-full h-full object-cover rounded-lg shadow-md">
                     </div>
-                    <div class="h-full w-1/3 hover:scale-[102%] transition-transform duration-300 hover:cursor-pointer">
+                    <div class="h-full w-1/3 hover:scale-[102%] transition-transform duration-300 hover:cursor-pointer"
+                        onclick="openModal('{{ asset('images/header/puppy-2.jpg') }}', 'Puppy 2')">
                         <img src="{{ asset('images/header/puppy-2.jpg') }}" alt="Header Image" class="w-full h-full object-cover rounded-lg shadow-md">
                     </div>
                 </div>
                 {{-- middle row --}}
                 <div class="h-1/3 flex justify-between items-center gap-2 mb-2">
-                    <div class="h-full w-1/4 hover:scale-[102%] transition-transform duration-300 hover:cursor-pointer">
+                    <div class="h-full w-1/4 hover:scale-[102%] transition-transform duration-300 hover:cursor-pointer"
+                        onclick="openModal('{{ asset('images/header/puppy-7.jpg') }}', 'Puppy 7')">
                         <img src="{{ asset('images/header/puppy-7.jpg') }}" alt="Header Image" class="w-full h-full object-cover rounded-lg shadow-md">
                     </div>
-                    <div class="h-full w-1/4 hover:scale-[102%] transition-transform duration-300 hover:cursor-pointer">
+                    <div class="h-full w-1/4 hover:scale-[102%] transition-transform duration-300 hover:cursor-pointer"
+                        onclick="openModal('{{ asset('images/header/puppy-3.jpg') }}', 'Puppy 3')">
                         <img src="{{ asset('images/header/puppy-3.jpg') }}" alt="Header Image" class="w-full h-full object-cover rounded-lg shadow-md">
                     </div>
-                    <div class="h-full w-1/4 hover:scale-[102%] transition-transform duration-300 hover:cursor-pointer">
+                    <div class="h-full w-1/4 hover:scale-[102%] transition-transform duration-300 hover:cursor-pointer"
+                        onclick="openModal('{{ asset('images/header/puppy-4.jpg') }}', 'Puppy 4')">
                         <img src="{{ asset('images/header/puppy-4.jpg') }}" alt="Header Image" class="w-full h-full object-cover rounded-lg shadow-md">
                     </div>
-                    <div class="h-full w-1/4 hover:scale-[102%] transition-transform duration-300 hover:cursor-pointer">
+                    <div class="h-full w-1/4 hover:scale-[102%] transition-transform duration-300 hover:cursor-pointer"
+                        onclick="openModal('{{ asset('images/header/puppy-1.jpg') }}', 'Puppy 1')">
                         <img src="{{ asset('images/header/puppy-1.jpg') }}" alt="Header Image" class="w-full h-full object-cover rounded-lg shadow-md">
                     </div>
                 </div>
                 {{-- bottom row --}}
                 <div class="h-1/3 flex justify-between items-center gap-2">
-                    <div class="h-full w-1/3 hover:scale-[102%] transition-transform duration-300 hover:cursor-pointer">
+                    <div class="h-full w-1/3 hover:scale-[102%] transition-transform duration-300 hover:cursor-pointer"
+                        onclick="openModal('{{ asset('images/header/puppy-6.jpg') }}', 'Puppy 6')">
                         <img src="{{ asset('images/header/puppy-6.jpg') }}" alt="Header Image" class="w-full h-full object-cover rounded-lg shadow-md">
                     </div>
-                    <div class="h-full w-2/3 hover:scale-[102%] transition-transform duration-300 hover:cursor-pointer">
+                    <div class="h-full w-2/3 hover:scale-[102%] transition-transform duration-300 hover:cursor-pointer"
+                        onclick="openModal('{{ asset('images/header/puppy-8.jpg') }}', 'Puppy 8')">
                         <img src="{{ asset('images/header/puppy-8.jpg') }}" alt="Header Image" class="w-full h-full object-cover rounded-lg shadow-md">
                     </div>
                 </div>
+            </div>
+        </div>
+
+        {{-- modal for image gallery --}}
+        <div id="imageModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75" onclick="closeModal()">
+            <div class="relative flex items-center justify-center w-full h-full p-4" onclick="event.stopPropagation()">
+                <img id="modalImage" src="" alt="" class="max-w-full max-h-full object-contain rounded-lg">
+                
+                {{-- close button --}}
+                <button onclick="closeModal()" class="absolute w-[40px] h-[40px] text-xl top-2 right-2 text-[#FEFAE0] bg-[#DDA15E] hover:bg-[#BC6C25] rounded-full transition-all ease-in-out">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
             </div>
         </div>
 
@@ -138,7 +158,7 @@
         <div class="flex flex-col lg:flex-row w-full justify-center items-center gap-16 p-8">
             <div class="container w-[70%] lg:w-[50%]">
                 <h2 class="text-3xl font-bold text-center mb-4">Over Ons</h2>
-                <p class="text-gray-700 text-center">
+                <p class="text-center">
                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ut quam condimentum, scelerisque risus vel, imperdiet neque. Donec at maximus tellus, eget lobortis nibh. Sed sit amet eros mauris. Integer ac interdum turpis. Nullam at porta purus, id facilisis nisl. Sed ac pellentesque risus, vitae aliquet ex. Aliquam eget porta nulla. Donec placerat sapien a metus laoreet feugiat. In hac habitasse platea dictumst.
 
 Nunc leo erat, convallis nec imperdiet vitae, dapibus id mi. Morbi lacinia ullamcorper nibh ac mollis. Cras egestas, enim vel congue eleifend, leo tortor varius elit, a volutpat massa erat eu augue. Sed sagittis felis maximus libero volutpat, sed aliquam massa feugiat. Proin imperdiet nec metus vitae mattis. Etiam aliquet vitae nisl id viverra. Proin varius leo sit amet neque dictum viverra. Cras justo turpis, convallis ac purus ac, porta ullamcorper lorem. Proin condimentum sem sit amet euismod ullamcorper. Curabitur facilisis fermentum enim, id molestie quam semper quis. Aliquam tempus, leo blandit volutpat ullamcorper, leo nisl lacinia risus, luctus vestibulum lectus velit id nunc. Sed quis nisi et turpis malesuada placerat.
@@ -152,14 +172,44 @@ In est arcu, viverra non nisl eget, euismod tincidunt leo. Suspendisse laoreet i
         </div>
     </div>
 
+    {{-- half of this is stolen from W3schools: 
+    slideshow: https://www.w3schools.com/howto/howto_js_slideshow_gallery.asp
+    image modal: https://www.w3schools.com/howto/howto_css_modal_images.asp
+    
+    and there is some use of ai to correct bugs and issues--}}
     <script>
+        // gallery modal
+        function openModal(imageSrc, imageAlt) {
+            const modal = document.getElementById('imageModal');
+            const modalImage = document.getElementById('modalImage');
+            
+            modalImage.src = imageSrc;
+            modalImage.alt = imageAlt;
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('imageModal');
+            modal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // image slider
         document.addEventListener('DOMContentLoaded', function() {
             const sliderTrack = document.querySelector('.slider-track');
             const slides = document.querySelectorAll('.slide');
             const dots = document.querySelectorAll('.slide-dot');
             let currentIndex = 0;
             const slideCount = slides.length;
-            const slideDuration = 4000; // 4 seconds per slide
+            const slideDuration = 4000;
             
             function showSlide(index) {
                 // Move the slider track
