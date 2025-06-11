@@ -37,6 +37,30 @@ class CartController extends Controller
         return back()->with('success', 'Product toegevoegd aan winkelwagen!');
     }
 
+    public function update(Request $request, Product $product)
+    {
+        $cart = session()->get('cart', []);
+
+        if (isset($cart[$product->id])) {
+            $cart[$product->id]['quantity'] = max(1, (int)$request->input('quantity'));
+            session()->put('cart', $cart);
+        }
+
+        return back()->with('success', 'Aantal bijgewerkt.');
+    }
+
+    public function remove(Product $product)
+    {
+        $cart = session()->get('cart', []);
+
+        if (isset($cart[$product->id])) {
+            unset($cart[$product->id]);
+            session()->put('cart', $cart);
+        }
+
+        return back()->with('success', 'Product verwijderd uit winkelwagen.');
+    }
+
     public function checkout()
     {
         $cart = session()->get('cart', []);
@@ -50,7 +74,7 @@ class CartController extends Controller
         }
 
         $order = Order::create([
-            'user_id' => null, // change for login
+            'user_id' => auth()->check() ? auth()->id() : null,
             'totaal_prijs' => $total,
         ]);
 
@@ -68,4 +92,5 @@ class CartController extends Controller
 
         return redirect()->route('store.index');
     }
+
 }

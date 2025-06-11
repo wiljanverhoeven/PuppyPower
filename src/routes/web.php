@@ -1,18 +1,18 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
 use App\Http\Controllers\ProductController;
-
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TrainingController;
 use App\Http\Controllers\MytrainingsController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Admin\OrderController as adminOrderController;
 use App\Http\Controllers\Admin\TrainingController as AdminTrainingController;
 use App\Http\Controllers\Admin\ModuleController as AdminModuleController;
 use App\Http\Controllers\Admin\MediaController as AdminMediaController;
+use App\Http\Controllers\Admin\ProductController as AdminProductController;
 
 Route::get('/', function () {
     return view('home');
@@ -25,12 +25,17 @@ Route::get('/contact', function () {
 Route::post('/contact', [ContactController::class, 'store'])
     ->name('contact.store');
 
+//shop routes
 Route::get('/store', [ProductController::class, 'index'])->name('store.index');
 Route::get('/store/{product}', [ProductController::class, 'show'])->name('store.show');
 
+//cart routes
 Route::post('/cart/add/{product}', [CartController::class, 'add'])->name('cart.add');
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::post('/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
+Route::post('/cart/update/{product}', [CartController::class, 'update'])->name('cart.update');
+Route::post('/cart/remove/{product}', [CartController::class, 'remove'])->name('cart.remove');
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -60,6 +65,20 @@ Route::prefix('admin')->group(function () {
     Route::resource('trainings.modules', AdminModuleController::class);
     Route::resource('trainings.modules.media', AdminMediaController::class);
 });
+
+//admin product routes
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::resource('producten', AdminProductController::class)->parameters([
+        'producten' => 'product'
+    ]);
+});
+
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/order', [AdminOrderController::class, 'index'])->name('order.index');
+});
+
+
+
 
 
 // Auth
