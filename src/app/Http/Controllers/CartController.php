@@ -74,7 +74,7 @@ class CartController extends Controller
         }
 
         $order = Order::create([
-            'user_id' => null, // change for login
+            'user_id' => auth()->check() ? auth()->id() : null,
             'totaal_prijs' => $total,
         ]);
 
@@ -92,4 +92,5 @@ class CartController extends Controller
 
         return redirect()->route('store.index');
     }
+
 }
