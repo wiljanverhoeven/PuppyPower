@@ -12,7 +12,7 @@
             <a href="{{ route('admin.producten.index') }}">Producten</a>
         </li>
         <li>
-            <a href="">Orders</a>
+            <a href="{{ route('admin.order.index') }}">Orders</a>
         </li>
     </ul>
 </x-app-layout>

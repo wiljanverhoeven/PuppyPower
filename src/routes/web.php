@@ -8,6 +8,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TrainingController;
 use App\Http\Controllers\MytrainingsController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Admin\OrderController as adminOrderController;
 use App\Http\Controllers\Admin\TrainingController as AdminTrainingController;
 use App\Http\Controllers\Admin\ModuleController as AdminModuleController;
 use App\Http\Controllers\Admin\MediaController as AdminMediaController;
@@ -71,6 +72,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
         'producten' => 'product'
     ]);
 });
+
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/order', [AdminOrderController::class, 'index'])->name('order.index');
+});
+
+
 
 
 
