@@ -1,18 +1,21 @@
 <x-app-layout>
     {{-- header image --}}
-    <div class="relative h-96">
-        <img src="{{ asset('/images/contact-header.jpg') }}" alt="Header Image" class="w-full h-full object-cover brightness-60">
+    {{-- <div class="relative h-[calc(100vh-4rem)] overflow-hidden p-8">
+        <img src="{{ asset('/images/contact-header.jpg') }}" alt="Header Image" class="w-full h-full object-cover rounded-xl brightness-60">
         <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-4">
             <h1 class="text-gray-200 text-4xl font-bold">Neem contact met ons op</h1>
             <p class="text-gray-200">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
             <button class="bg-[#DDA15E] hover:bg-[#BC6C25] ease-in-out duration-300 w-48 h-12 rounded-xl text-gray-200 mt-6 shadow-md">Meest gestelde vragen</button>
         </div>
-    </div>
+    </div> --}}
     
+    <div class="w-full my-6 text-center">
+        <h1 class="text-2xl font-bold">Neem contact op met ons!</h1>
+    </div>
         {{-- boxes container --}}
-    <div class="flex flex-row mt-4 justify-center space-x-4 mb-10">
+    <div class="flex flex-col md:flex-row mt-4 justify-center items-center md:space-x-4 mb-10">
         {{-- contact info/openingstijden --}}
-        <div class="bg-[#606C38] text-white rounded-lg w-80 h-[460px] mt-4 p-4 gap-2">
+        <div class="bg-[#606C38] text-white rounded-lg w-[90vw] md:w-80 h-[460px] mt-4 p-4 gap-2">
             <h2 class="text-xl text-[#FEFAE0] font-bold">Contact Informatie</h2>
             <p class="">Telefoon: 123-456-7890</p>
             <p class="">Email: email@email.com</p>
@@ -43,7 +46,7 @@
             </div>
         </div>
         {{-- contact formulier --}}
-        <div class="flex flex-col bg-[#606C38] text-white rounded-lg w-[50%] h-[460px] mt-4 p-4 gap-2">
+        <div class="flex flex-col bg-[#606C38] text-white rounded-lg w-[90vw] md:w-[50%] h-[460px] mt-4 p-4 gap-2">
             <h2 class="text-xl text-[#FEFAE0] font-bold">Stel je vraag</h2>
             <form method="post" action="{{ route('contact.store') }}" 
             class="flex flex-col justify-center">
@@ -52,11 +55,11 @@
                     <div class="flex flex-row gap-4 w-full">
                         <div class="flex flex-col w-1/2">
                             <label for="name">Voornaam:</label>
-                            <input type="text" id="name" class="bg-[#FEFAE0] focus:outline-2 focus:outline-offset-0 focus:outline-[#BC6C25] text-black rounded-md border-none" name="name" required>
+                            <input type="text" id="name" class="w-full bg-[#FEFAE0] focus:outline-2 focus:outline-offset-0 focus:outline-[#BC6C25] text-black rounded-md border-none" name="name" required>
                         </div>
                         <div class="flex flex-col w-1/2">
                             <label for="lastname">Achternaam:</label>
-                            <input type="text" id="lastname" class="bg-[#FEFAE0] text-black focus:outline-2 focus:outline-offset-0 focus:outline-[#BC6C25] rounded-md border-none" name="lastname" required>
+                            <input type="text" id="lastname" class="w-full bg-[#FEFAE0] text-black focus:outline-2 focus:outline-offset-0 focus:outline-[#BC6C25] rounded-md border-none" name="lastname" required>
                         </div>
 
                     </div>
@@ -64,12 +67,12 @@
                     <div class="flex flex-row gap-4 w-full">
                         <div class="flex flex-col w-1/2">
                             <label for="email">Email:</label>
-                            <input type="email" id="email" class="bg-[#FEFAE0] text-black focus:outline-2 focus:outline-offset-0 focus:outline-[#BC6C25] rounded-md border-none" name="email" required>
+                            <input type="email" id="email" class="w-full bg-[#FEFAE0] text-black focus:outline-2 focus:outline-offset-0 focus:outline-[#BC6C25] rounded-md border-none" name="email" required>
                         </div>
                     
                         <div class="flex flex-col w-1/2">
                             <label for="phone">Phone:</label>
-                            <input type="text" id="phone" class="bg-[#FEFAE0] text-black focus:outline-2 focus:outline-offset-0 focus:outline-[#BC6C25] rounded-md border-none" name="phone">
+                            <input type="text" id="phone" class="w-full bg-[#FEFAE0] text-black focus:outline-2 focus:outline-offset-0 focus:outline-[#BC6C25] rounded-md border-none" name="phone">
                         </div>
                     </div>
                 
