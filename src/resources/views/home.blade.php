@@ -91,7 +91,7 @@
             <div class="text-center mb-4">
                     <h2 class="text-3xl font-bold">Onze Pups</h2>
                     <p>Zie meer foto's van onze schattige pups op 
-                        <a href="" class="text-pink-500 hover:underline">Instagram</a>!
+                        <a href="https://www.instagram.com/backtobalance.dogs" class="text-pink-500 hover:underline">Instagram</a>!
                     </p>
             </div>
 
@@ -143,7 +143,7 @@
         </div>
 
         {{-- modal for image gallery --}}
-        <div id="imageModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75" onclick="closeModal()">
+        <div id="imageModal" class="hidden fixed inset-0 z-50 items-center justify-center bg-black bg-opacity-75" onclick="closeModal()">
             <div class="relative flex items-center justify-center w-full h-full p-4" onclick="event.stopPropagation()">
                 <img id="modalImage" src="" alt="" class="max-w-full max-h-full object-contain rounded-lg">
                 

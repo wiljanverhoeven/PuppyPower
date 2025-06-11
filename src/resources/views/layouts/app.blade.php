@@ -28,32 +28,32 @@
                 {{-- <a href="{{ url('/') }}" class="text-xl font-bold ">Logo</a> --}}
                 <div>
                     <a href="{{ url('/') }}" class="text-xl font-bold ">
-                        <img src="{{ asset('images/logo.svg') }}" alt="" class="h-20 fill-[#E8E0C8] w-auto">
+                        <img src="{{ asset('images/logo.svg') }}" alt="" class="h-20 w-auto">
                     </a>
                 </div>
 
                 <!-- Desktop Links -->
                 <div class="hidden sm:flex space-x-4">
-                    <a href="{{ url('/') }}" class="hover:text-[#E8E0C8] transition-all duration-150 {{ request()->is('/') ? 'underline' : '' }}">
+                    <a href="{{ url('/') }}" class="hover:text-[#DDA15E] transition-all duration-150 {{ request()->is('/') ? 'underline' : '' }}">
                         Homepage
                     </a>
-                    <a href="{{ route('store.index') }}" class="hover:text-[#E8E0C8] transition-all duration-150 {{ request()->routeIs('store.index') ? 'underline' : '' }}">
+                    <a href="{{ route('store.index') }}" class="hover:text-[#DDA15E] transition-all duration-150 {{ request()->routeIs('store.index') ? 'underline' : '' }}">
                         Webshop
                     </a>
-                     <a href="{{ route('trainings') }}" class="hover:text-[#E8E0C8] transition-all duration-150 {{ request()->routeIs('trainings') ? 'underline' : '' }}">
+                     <a href="{{ route('trainings') }}" class="hover:text-[#DDA15E] transition-all duration-150 {{ request()->routeIs('trainings') ? 'underline' : '' }}">
                         Trainingen
                     </a>
-                    <a href="{{ route('cart.index') }}"{{ request()->routeIs('cart.index') ? 'underline' : '' }}">
-                    Winkelwagen
-                    </a>
+                    {{-- <a href="{{ route('cart.index') }}" class="hover:text-[#DDA15E] transition-all duration-150" {{ request()->routeIs('cart.index') ? 'underline' : '' }}">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                    </a> --}}
 
                     @auth
                         @if (auth()->user()->role !== 'admin')
-                        <a href="{{ route('mytrainings') }}" class="hover:text-[#E8E0C8] transition-all duration-150 {{ request()->routeIs('mytrainings') ? 'underline' : '' }}">
+                        <a href="{{ route('mytrainings') }}" class="hover:text-[#DDA15E] transition-all duration-150 {{ request()->routeIs('mytrainings') ? 'underline' : '' }}">
                             Mijn Trainingen
                         </a>
                         @else
-                        <a href="{{ route('admin') }}" class="hover:text-[#E8E0C8] transition-all duration-150 {{ request()->routeIs('mytrainings') ? 'underline' : '' }}">
+                        <a href="{{ route('admin') }}" class="hover:text-[#DDA15E] transition-all duration-150 {{ request()->routeIs('mytrainings') ? 'underline' : '' }}">
                             Admin dashboard
                         </a>
                         @endif
@@ -63,16 +63,21 @@
 
             <!-- Desktop Auth -->
             {{-- replace the path from "/" to login, register and logout when the routes are working --}}
-            <div class="hidden sm:flex sm:items-center space-x-4">
+            <div class="hidden sm:flex sm:items-center space-x-4 gap-4">
+                <a href="{{ route('cart.index') }}" class="hover:text-[#DDA15E] text-xl transition-all duration-150" {{ request()->routeIs('cart.index') ? 'underline' : '' }}">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                </a>
                 @auth
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
-                        <button class="text-sm hover:text-[#E8E0C8] transition-all duration-150">Log Out</button>
+                        <button class="text-sm hover:text-[#DDA15E] transition-all duration-150">Log Out</button>
                     </form>
                 @else
-                    <a href="{{ route('login') }}" class="text-sm hover:text-[#E8E0C8] transition-all duration-150">Login</a>
-                    <span class="text-sm">/</span>
-                    <a href="{{ route('register') }}" class="text-sm hover:text-[#E8E0C8] transition-all duration-150">Register</a>
+                    <a href="{{ route('login') }}" class="text-sm hover:text-[#DDA15E] text-xl transition-all duration-150">
+                        <i class="fa-solid fa-user"></i>
+                    </a>
+                    {{-- <span class="text-sm">/</span>
+                    <a href="{{ route('register') }}" class="text-sm hover:text-[#DDA15E] transition-all duration-150">Register</a> --}}
                 @endauth
             </div>
 
@@ -127,15 +132,33 @@
 
 {{-- footer --}}
 <footer class="bg-[#283618] text-[#FEFAE0]">
-    <div class="flex justify-between items-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-        <div>
-            <a href="{{ url('/') }}" class="text-xl font-bold text-[#FEFAE0]">Logo</a>
-            {{-- <p class="text-center text-gray-500 text-sm">© {{ date('Y') }} Puppy Power Academy. All rights reserved.</p> --}}
+    <div class="flex justify-between items-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex h-full w-full items-center">
+            <a href="{{ url('/') }}" class="">
+                <img src="{{ asset('images/logo.svg') }}" alt="" class="h-24 w-auto">
+            </a>
         </div>
-        <div>
-            <a href="{{ url('/contact') }}" class="hover:text-[#E8E0C8] transition-all duration-150">Contact</a>
-            <span class="mx-2">|</span>
-            <a href="{{ url('/') }}" class="hover:text-[#E8E0C8] transition-all duration-150">Privacy Policy</a>
+        <div class="flex flex-col-reverse shrink-0 gap-2">
+            <div>
+                <a href="{{ url('/contact') }}" class="hover:text-[#DDA15E] transition-all duration-150">Contact</a>
+                <span class="mx-2">|</span>
+                <a href="{{ url('/') }}" class="hover:text-[#DDA15E] transition-all duration-150">Privacy Policy</a>
+            </div>
+            <div class="flex flex-row justify-between">
+                {{-- Social Media Links --}}
+                <a href="https://www.facebook.com" class="text-[#FEFAE0] hover:text-blue-600 transition-all duration-150 text-2xl" aria-label="Facebook">
+                    <i class="fab fa-facebook"></i>
+                </a>
+                <a href="https://www.instagram.com/backtobalance.dogs" class="text-[#FEFAE0] hover:text-pink-500 transition-all duration-150 text-2xl" aria-label="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://twitter.com" class="text-[#FEFAE0] hover:text-black transition-all duration-150 text-2xl" aria-label="X">
+                    <i class="fab fa-x-twitter"></i>
+                </a>
+                <a href="https://www.linkedin.com" class="text-[#FEFAE0] hover:text-blue-700 transition-all duration-150 text-2xl" aria-label="LinkedIn">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+            </div>
         </div>
     </div>
 </footer>

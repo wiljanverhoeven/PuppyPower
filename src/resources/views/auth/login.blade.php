@@ -3,6 +3,7 @@
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
     <form method="POST" action="{{ route('login') }}" class="bg-[#606C38] p-6 rounded-lg">
+        <h1 class="text-xl font-bold text-[#FEFAE0] mb-4">Inloggen</h1>
         @csrf
 
         <!-- Email Address -->
@@ -55,5 +56,7 @@
                 {{ __('Log in') }}
             </x-primary-button>
         </div>
+        <a href="{{ route('register') }}" class="text-[#FEFAE0] hover:text-[#DDA15E] text-sm underline flex items-end w-full justify-end">Nog geen account? Ga naar registreren.</a>
     </form>
+    {{-- <a href="" class="text-[#FEFAE0] hover:text-[#DDA15E] underline flex items-end w-full justify-end">Geen account? Ga naar registreren.</a> --}}
 </x-guest-layout>
