@@ -1,9 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
 use App\Http\Controllers\ProductController;
-
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProfileController;
@@ -13,6 +11,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Admin\TrainingController as AdminTrainingController;
 use App\Http\Controllers\Admin\ModuleController as AdminModuleController;
 use App\Http\Controllers\Admin\MediaController as AdminMediaController;
+use App\Http\Controllers\Admin\ProductController as AdminProductController;
 
 Route::get('/', function () {
     return view('home');
@@ -25,9 +24,11 @@ Route::get('/contact', function () {
 Route::post('/contact', [ContactController::class, 'store'])
     ->name('contact.store');
 
+//shop routes
 Route::get('/store', [ProductController::class, 'index'])->name('store.index');
 Route::get('/store/{product}', [ProductController::class, 'show'])->name('store.show');
 
+//cart routes
 Route::post('/cart/add/{product}', [CartController::class, 'add'])->name('cart.add');
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::post('/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
@@ -63,6 +64,14 @@ Route::prefix('admin')->group(function () {
     Route::resource('trainings.modules', AdminModuleController::class);
     Route::resource('trainings.modules.media', AdminMediaController::class);
 });
+
+//admin product routes
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::resource('producten', AdminProductController::class)->parameters([
+        'producten' => 'product'
+    ]);
+});
+
 
 
 // Auth
