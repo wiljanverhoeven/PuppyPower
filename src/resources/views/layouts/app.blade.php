@@ -43,9 +43,6 @@
                      <a href="{{ route('trainings') }}" class="hover:text-[#DDA15E] transition-all duration-150 {{ request()->routeIs('trainings') ? 'underline' : '' }}">
                         Trainingen
                     </a>
-                    {{-- <a href="{{ route('cart.index') }}" class="hover:text-[#DDA15E] transition-all duration-150" {{ request()->routeIs('cart.index') ? 'underline' : '' }}">
-                        <i class="fa-solid fa-cart-shopping"></i>
-                    </a> --}}
 
                     @auth
                         @if (auth()->user()->role !== 'admin')
@@ -53,7 +50,7 @@
                             Mijn Trainingen
                         </a>
                         @else
-                        <a href="{{ route('admin') }}" class="hover:text-[#DDA15E] transition-all duration-150 {{ request()->routeIs('mytrainings') ? 'underline' : '' }}">
+                        <a href="{{ route('admin') }}" class="hover:text-[#DDA15E] transition-all duration-150 {{ request()->routeIs('admin') ? 'underline' : '' }}">
                             Admin dashboard
                         </a>
                         @endif
@@ -70,10 +67,10 @@
                 @auth
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
-                        <button class="text-sm hover:text-[#DDA15E] transition-all duration-150">Log Out</button>
+                        <button class="hover:text-[#DDA15E] transition-all duration-150 gap-2">Uitloggen <i class="fa-solid fa-right-from-bracket"></i></button>
                     </form>
                 @else
-                    <a href="{{ route('login') }}" class="text-sm hover:text-[#DDA15E] text-xl transition-all duration-150">
+                    <a href="{{ route('login') }}" class=" hover:text-[#DDA15E] text-xl transition-all duration-150">
                         <i class="fa-solid fa-user"></i>
                     </a>
                     {{-- <span class="text-sm">/</span>
@@ -83,16 +80,23 @@
 
             <!-- Mobile hamburger -->
             <div class="sm:hidden flex items-center">
-                <button id="mobile-menu-toggle" class="text-gray-500 hover:text-gray-100 transition-all duration-150 focus:outline-none">
-                    <svg class="h-6 w-6" id="hamburger-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M4 6h16M4 12h16M4 18h16" />
-                    </svg>
-                    <svg class="h-6 w-6 hidden" id="close-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </button>
+                <div class="space-x-4 gap-4 flex justify-center items-center">
+                    <a href="{{ route('cart.index') }}" class="hover:text-[#DDA15E] text-xl transition-all duration-150" {{ request()->routeIs('cart.index') ? 'underline' : '' }}">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                    </a>
+                    
+                    {{-- Mobile menu toggle button --}}
+                    <button id="mobile-menu-toggle" class="text-[#FEFAE0] text-xl transition-all duration-150 focus:outline-none">
+                        <svg class="h-6 w-6" id="hamburger-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                        <svg class="h-6 w-6 hidden" id="close-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -100,24 +104,41 @@
     <!-- Mobile navbar -->
     <div id="mobile-menu" class="sm:hidden hidden px-4 pb-4">
         <div class="pt-2 pb-3 space-y-1">
-            <a href="{{ url('/') }}" class="block px-4 py-2 text-gray-100 hover:bg-gray-800 transition-all duration-150 {{ request()->is('/') ? 'font-semibold' : '' }}">
+            <a href="{{ url('/') }}" class="block px-4 py-2 text-[#FEFAE0] {{ request()->is('/') ? 'font-semibold' : '' }}">
                 Homepage
             </a>
-            <a href="{{ route('contact') }}" class="block px-4 py-2 text-gray-100 hover:bg-gray-800 transition-all duration-150 {{ request()->routeIs('contact') ? 'font-semibold' : '' }}">
-                Contact
+            <a href="{{ route('store.index') }}" class="block px-4 py-2 text-[#FEFAE0] {{ request()->routeIs('store.index') ? 'font-semibold' : '' }}">
+                Webshop
             </a>
+            <a href="{{ route('trainings')}}" class="block px-4 py-2 text-[#FEFAE0] {{ request()->routeIs('trainings') ? 'font-semibold' : '' }}">
+                Trainingen
+            </a>
+            @auth
+                @if (auth()->user()->role !== 'admin')
+                    <a href="{{ route('mytrainings') }}" class="block px-4 py-2 text-[#FEFAE0] {{ request()->routeIs('mytrainings') ? 'font-semibold' : '' }}">
+                        Mijn Trainingen
+                    </a>
+                @else
+                    <a href="{{ route('admin') }}" class="block px-4 py-2 text-[#FEFAE0] {{ request()->routeIs('admin') ? 'font-semibold' : '' }}">
+                        Admin dashboard
+                    </a>
+                @endif
+            @endauth
         </div>
         {{-- replace the path from "/" to login, register and logout when the routes are working --}}
-        <div class="border-t border-gray-700 pt-4">
+        <div class="border-t border-gray-700 pt-4 px-4 flex flex-row items-center justify-between">
+            <a href="{{ route('contact') }}" class="block py-2 text-[#FEFAE0] {{ request()->routeIs('contact') ? 'font-semibold' : '' }}">
+                Contact
+            </a>
             @auth
-                <form method="POST" action="{{ url('/') }}">
+                <form method="POST" action="{{ route('logout') }}">
                     @csrf
-                    <button class="block w-full text-left px-4 py-2 text-gray-100 hover:bg-gray-800 transition-all duration-150">
-                        Log Out
-                    </button>
+                    <button class=" hover:text-[#DDA15E] transition-all duration-150 gap-2">Uitloggen <i class="fa-solid fa-right-from-bracket"></i></button>
                 </form>
-            @else
-                <a href="{{ url('/') }}" class="block px-4 py-2 text-gray-100 hover:bg-gray-800 transition-all duration-150">Register</a>
+                @else
+                    <a href="{{ route('login') }}" class=" hover:text-[#DDA15E] text-xl transition-all duration-150">
+                        <i class="fa-solid fa-user"></i>
+                    </a>
             @endauth
         </div>
     </div>
