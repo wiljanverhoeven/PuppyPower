@@ -67,6 +67,12 @@ class User extends Authenticatable
         return $this->belongsToMany(Training::class, 'mytrainings', 'user_id', 'training_id');
     }
 
+    public function availabilities()
+    {
+        return $this->hasMany(Availability::class, 'admin_id');
+    }
+
+
     /**
      * Check if the user has admin role
      */
