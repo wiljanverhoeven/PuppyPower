@@ -8,6 +8,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TrainingController;
 use App\Http\Controllers\MytrainingsController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Admin\AvailabilityController;
 use App\Http\Controllers\Admin\OrderController as adminOrderController;
 use App\Http\Controllers\Admin\TrainingController as AdminTrainingController;
 use App\Http\Controllers\Admin\ModuleController as AdminModuleController;
@@ -77,14 +78,15 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/order', [AdminOrderController::class, 'index'])->name('order.index');
 });
 
-
-
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::resource('availability', AvailabilityController::class);
+});
 
 
 // Auth
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name(name: 'profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 

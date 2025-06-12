@@ -14,5 +14,9 @@
         <li>
             <a href="{{ route('admin.order.index') }}">Orders</a>
         </li>
+        <li>
+            <a href="{{ route('admin.availability.index') }}">Beschikbaarheid plannen</a>
+        </li>
+
     </ul>
 </x-app-layout>
