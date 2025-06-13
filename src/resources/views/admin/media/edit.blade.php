@@ -1,32 +1,76 @@
 <x-app-layout>
-    <h1>Media bewerken: {{ $medium->title }}</h1>
+    <div class="container mx-auto px-4 py-6">
+        <div class="w-full mb-6 text-center">
+            <h1 class="text-2xl font-bold">Media bewerken: {{ $medium->title }}</h1>
+        </div>
 
-    <form method="POST" action="{{ route('trainings.modules.media.update', [$training, $module, $medium]) }}" enctype="multipart/form-data">
-        @csrf
-        @method('PUT')
-        <div>
-            <label for="title">Titel:</label><br>
-            <input type="text" name="title" id="title" value="{{ old('title', $medium->title) }}" required>
+        <div class="bg-[#606C38] rounded-lg shadow-lg p-6 max-w-3xl mx-auto">
+            <form method="POST" action="{{ route('trainings.modules.media.update', [$training, $module, $medium]) }}" enctype="multipart/form-data" class="space-y-6">
+                @csrf
+                @method('PUT')
+
+                <div class="space-y-4">
+                    <!-- Title Field -->
+                    <div>
+                        <label for="title" class="block text-sm font-medium text-[#FEFAE0]">Titel</label>
+                        <input type="text" name="title" id="title" value="{{ old('title', $medium->title) }}" required
+                               class="mt-1 block w-full rounded-md border-[#DDA15E] bg-[#FEFAE0] shadow-sm focus:border-[#BC6C25] focus:ring focus:ring-[#BC6C25] focus:ring-opacity-50 p-2">
+                        @error('title')
+                            <p class="mt-1 text-sm text-red-300">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <!-- Path/Youtube Field -->
+                    <div>
+                        <label for="path" class="block text-sm font-medium text-[#FEFAE0]">Youtube Link</label>
+                        <input type="text" name="path" id="path" value="{{ old('path', $medium->path) }}" required
+                               class="mt-1 block w-full rounded-md border-[#DDA15E] bg-[#FEFAE0] shadow-sm focus:border-[#BC6C25] focus:ring focus:ring-[#BC6C25] focus:ring-opacity-50 p-2">
+                        @error('path')
+                            <p class="mt-1 text-sm text-red-300">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <!-- Image Upload Field -->
+                    <div>
+                        <label for="image" class="block text-sm font-medium text-[#FEFAE0]">Of upload een nieuwe afbeelding</label>
+                        <p class="text-xs text-[#FEFAE0]/80 mb-1">(overschrijft bovenstaande indien ingevuld)</p>
+                        <input type="file" name="image" id="image" accept="image/*"
+                               class="mt-1 block w-full text-sm text-[#FEFAE0] file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-[#DDA15E] file:text-[#FEFAE0] hover:file:bg-[#BC6C25]">
+                        @error('image')
+                            <p class="mt-1 text-sm text-red-300">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <!-- Description Field -->
+                    <div>
+                        <label for="description" class="block text-sm font-medium text-[#FEFAE0]">Beschrijving</label>
+                        <textarea name="description" id="description" rows="4"
+                                  class="mt-1 block w-full rounded-md border-[#DDA15E] bg-[#FEFAE0] shadow-sm focus:border-[#BC6C25] focus:ring focus:ring-[#BC6C25] focus:ring-opacity-50 p-2">{{ old('description', $medium->description) }}</textarea>
+                        @error('description')
+                            <p class="mt-1 text-sm text-red-300">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <!-- Order Field -->
+                    <div>
+                        <label for="order" class="block text-sm font-medium text-[#FEFAE0]">Volgorde</label>
+                        <input type="number" name="order" id="order" value="{{ old('order', $medium->order) }}" required min="0"
+                               class="mt-1 block w-full rounded-md border-[#DDA15E] bg-[#FEFAE0] shadow-sm focus:border-[#BC6C25] focus:ring focus:ring-[#BC6C25] focus:ring-opacity-50 p-2">
+                        @error('order')
+                            <p class="mt-1 text-sm text-red-300">{{ $message }}</p>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="flex justify-end space-x-4 pt-4">
+                    <a href="{{ route('trainings.modules.media.index', [$training, $module]) }}" class="px-4 py-2 text-[#FEFAE0] hover:text-[#DDA15E] transition-colors duration-200">
+                        Annuleren
+                    </a>
+                    <button type="submit" class="px-4 py-2 bg-[#DDA15E] hover:bg-[#BC6C25] text-[#FEFAE0] rounded-md transition-colors duration-200 flex items-center">
+                        <i class="fas fa-save mr-2"></i> Media opslaan
+                    </button>
+                </div>
+            </form>
         </div>
-        <div>
-            <label for="path">Youtube Link:</label><br>
-            <input type="text" name="path" id="path" value="{{ old('path', $medium->path) }}" required>
-        </div>
-        <div>
-            <label for="image">Of upload een nieuwe afbeelding (overschrijft bovenstaande indien ingevuld):</label><br>
-            <input type="file" name="image" id="image" accept="image/*">
-        </div>
-        <div>
-            <label for="description">Beschrijving:</label><br>
-            <textarea name="description" id="description">{{ old('description', $medium->description) }}</textarea>
-        </div>
-        <div>
-            <label for="order">Volgorde:</label><br>
-            <input type="number" name="order" id="order" value="{{ old('order', $medium->order) }}" required min="0">
-        </div>
-        <div class="py-4">
-            <button type="submit">Media opslaan</button>
-        </div>
-    </form>
+    </div>
 </x-app-layout>
-
