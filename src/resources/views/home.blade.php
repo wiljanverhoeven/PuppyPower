@@ -13,7 +13,7 @@
                         <a href="{{ url('/contact') }}" class="flex flex-wrap justify-center items-center text-center gap-2">Neem contact op <i class="fa-solid fa-paper-plane"></i></a>
                     </button>
                     <button class="w-2/3 bg-[#DDA15E] hover:bg-[#BC6C25] text-[#FEFAE0] py-2 rounded-md shadow-md transition-all ease-in-out">
-                        <a href="{{ url('/contact') }}" class="flex flex-wrap justify-center items-center text-center gap-2">Meer over ons <i class="fa-solid fa-circle-info"></i></a>
+                        <a href="#over-ons" class="flex flex-wrap justify-center items-center text-center gap-2">Meer over ons <i class="fa-solid fa-circle-info"></i></a>
                     </button>
                 </div>
             </div>
@@ -66,7 +66,7 @@
                         <h2 class="text-xl text-[#FEFAE0] font-bold">Trainingen</h2>
                         <p class="text-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                         <button class="bg-[#DDA15E] hover:bg-[#BC6C25] text-[#FEFAE0] w-full py-2 rounded-md transition-all ease-in-out">
-                            <a href="{{route('store.index')}}" class="flex flex-wrap justify-center items-center text-center gap-2">Naar Trainingen <i class="fa-solid fa-circle-arrow-right"></i></a>
+                            <a href="{{route('trainings')}}" class="flex flex-wrap justify-center items-center text-center gap-2">Naar Trainingen <i class="fa-solid fa-circle-arrow-right"></i></a>
                         </button>
                     </div>
                 </div>
@@ -79,7 +79,7 @@
                         <h2 class="text-xl text-[#FEFAE0] font-bold">Dagopvang</h2>
                         <p class="text-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                         <button class="bg-[#DDA15E] hover:bg-[#BC6C25] text-[#FEFAE0] w-full py-2 rounded-md transition-all ease-in-out">
-                            <a href="{{route('store.index')}}" class="flex flex-wrap justify-center items-center text-center gap-2">Naar Dagopvang <i class="fa-solid fa-circle-arrow-right"></i></a>
+                            <a href="#" class="flex flex-wrap justify-center items-center text-center gap-2">Naar Dagopvang <i class="fa-solid fa-circle-arrow-right"></i></a>
                         </button>
                     </div>
                 </div>
@@ -155,7 +155,7 @@
         </div>
 
         {{-- over ons --}}
-        <div class="flex flex-col lg:flex-row w-full justify-center items-center gap-16 p-8">
+        <div id="over-ons" class="flex flex-col lg:flex-row w-full justify-center items-center gap-16 p-8">
             <div class="container w-[70%] lg:w-[50%]">
                 <h2 class="text-3xl font-bold text-center mb-4">Over Ons</h2>
                 <p class="text-center">
@@ -244,4 +244,10 @@ In est arcu, viverra non nisl eget, euismod tincidunt leo. Suspendisse laoreet i
             }, slideDuration);
         });
     </script>
+
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
 </x-app-layout>
