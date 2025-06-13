@@ -5,7 +5,7 @@
             <h1 class="text-2xl font-bold">Webshop</h1>
         </div>
 
-        <div class="flex flex-col lg:flex-row lg:space-x-6">
+        <div class="flex flex-col lg:flex-row lg:gap-6">
             {{-- Filter Sidebar --}}
             <form method="GET" action="{{ route('store.index') }}" class="mb-6 lg:mb-0 w-full lg:w-64 shrink-0 flex flex-col space-y-3 bg-[#606C38] p-4 rounded-lg shadow">
             <h2 class="text-[#FEFAE0] text-xl text-center font-bold">Filter</h2>
