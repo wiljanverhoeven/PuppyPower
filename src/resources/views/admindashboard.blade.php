@@ -5,7 +5,7 @@
         </div>
 
         <div class="bg-[#606C38] text-[#FEFAE0] rounded-lg shadow-lg p-6 max-w-2xl mx-auto">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="flex flex-col gap-6">
                 <!-- Trainingen Card -->
                 <a href="{{ route('trainings.index') }}" class="bg-[#DDA15E] rounded-lg p-4 shadow-md hover:bg-[#BC6C25] transition-colors duration-300">
                     <div class="flex items-center gap-2">
