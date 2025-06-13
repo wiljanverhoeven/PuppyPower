@@ -40,9 +40,9 @@
             {{-- Product Grid --}}
             <div class="flex-1 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
                 @foreach($products as $product)
-                    <div class="bg-[#606C38] rounded-lg overflow-hidden shadow-lg p-2 h-96 flex flex-col justify-between hover:scale-105 transition-transform duration-300">
+                    <div class="bg-[#606C38] rounded-lg overflow-hidden shadow-lg p-3 h-96 flex flex-col justify-between hover:scale-105 transition-transform duration-300">
                         <div class="">
-                            <img src="{{ asset('/images/placeholder.jpg') }}" alt="shop Image" class="w-full rounded-lg h-48 object-cover">
+                            <img src="{{ asset('/images/placeholder.jpg') }}" alt="shop Image" class="w-full rounded-lg h-40 object-cover">
                         </div>
                         <div class="p-2">
                             <h2 class="w-fit text-lg text-[#FEFAE0] font-semibold mb-2 hover:text-[#DDA15E] transition">
@@ -54,7 +54,7 @@
                                 {{ Str::limit($product->description, 100) }}
                             </p>
                         </div>
-                        <div class="flex flex-row justify-between items-center h-full">
+                        <div class="flex flex-row justify-between items-center h-full mt-9">
                             <div class="p-2 w-1/2">
                                 <p class="font-bold text-[#FEFAE0]">€{{ $product->price }}</p>
                                 <p class="italic text-sm text-white">{{ $product->category }}</p>
