@@ -12,10 +12,27 @@ use Illuminate\Http\Request;
 class CartController extends Controller
 {
     public function index()
-    {
-        $cart = session()->get('cart', []);
-        return view('cart.index', ['cart' => $cart]);
+{
+    $cart = session()->get('cart', []);
+    
+    // Bereken totaal aantal items
+    $totalQuantity = 0;
+    foreach ($cart as $item) {
+        $totalQuantity += $item['quantity'];
     }
+    
+    // Bereken totale prijs
+    $totalPrice = 0;
+    foreach ($cart as $item) {
+        $totalPrice += $item['product']->price * $item['quantity'];
+    }
+    
+    return view('cart.index', [
+        'cart' => $cart,
+        'totalQuantity' => $totalQuantity,
+        'totalPrice' => $totalPrice,
+    ]);
+}
 
     public function add(Request $request, Product $product)
     {
