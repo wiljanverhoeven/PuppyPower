@@ -83,6 +83,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
 });
 
 
+Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
+    Route::resource('availability', AvailabilityController::class)->except(['show']);
+});
+
+
 // Auth
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
