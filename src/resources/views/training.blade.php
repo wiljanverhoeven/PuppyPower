@@ -36,7 +36,7 @@
                         @endauth
                         @guest
                         <button class="flex flex-row items-center justify-center gap-2 bg-[#DDA15E] hover:bg-[#BC6C25] text-[#FEFAE0] w-full py-2 rounded-md transition-all ease-in-out duration-300" onclick="window.location.href='{{ route('login') }}'">
-                            Login voor meer info
+                            Log in voor meer info
                         </button>
                         @endguest
                     </div>

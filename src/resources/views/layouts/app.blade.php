@@ -110,15 +110,14 @@
                 @endif
             @endauth
         </div>
-        {{-- replace the path from "/" to login, register and logout when the routes are working --}}
         <div class="border-t border-gray-700 pt-4 px-4 flex flex-row items-center justify-between">
-            <a href="{{ route('contact') }}" class="block py-2 text-[#FEFAE0] {{ request()->routeIs('contact') ? 'font-semibold' : '' }}">
-                Contact
+            <a href="{{ route('profile.edit') }}" class="block py-2 text-[#FEFAE0] {{ request()->routeIs('contact') ? 'font-semibold' : '' }}">
+                <i class="fa-solid fa-user"></i> Profiel
             </a>
             @auth
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
-                    <button class=" hover:text-[#DDA15E] transition-all duration-150 gap-2">Uitloggen <i class="fa-solid fa-right-from-bracket"></i></button>
+                    <button class=" hover:text-[#DDA15E] transition-all duration-150 gap-2"><i class="fa-solid fa-right-from-bracket"></i> Uitloggen</button>
                 </form>
                 @else
                     <a href="{{ route('login') }}" class=" hover:text-[#DDA15E] text-xl transition-all duration-150">
