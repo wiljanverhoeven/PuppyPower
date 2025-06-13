@@ -44,32 +44,13 @@ class AvailabilityController extends Controller
             'date' => 'required|date|after_or_equal:today',
             'start_time' => 'required|date_format:H:i',
             'end_time' => 'required|date_format:H:i|after:start_time',
-            'repeat_weekly' => 'nullable|boolean',
+            'repeat_weeks' => 'nullable|integer|min:1|max:52',
         ]);
 
-        $repeatWeekly = $request->has('repeat_weekly');
+        $repeatWeeks = $request->input('repeat_weeks', 1);
         $date = \Carbon\Carbon::parse($request->date);
-        $weeksToRepeat = 10;
 
-        $overlapping = Availability::where('admin_id', auth()->id())
-            ->where('date', $request->date)
-            ->where(function ($query) use ($request) {
-                $query->whereBetween('start_time', [$request->start_time, $request->end_time])
-                    ->orWhereBetween('end_time', [$request->start_time, $request->end_time])
-                    ->orWhere(function ($q) use ($request) {
-                        $q->where('start_time', '<=', $request->start_time)
-                          ->where('end_time', '>=', $request->end_time);
-                    });
-            })
-            ->exists();
-
-        if ($overlapping) {
-            return redirect()->back()
-                ->withInput()
-                ->withErrors(['overlap' => 'Er bestaat al een beschikbaarheid voor deze tijd.']);
-        }
-
-        for ($i = 0; $i < ($repeatWeekly ? $weeksToRepeat : 1); $i++) {
+        for ($i = 0; $i < $repeatWeeks; $i++) {
             $currentDate = $date->copy()->addWeeks($i);
 
             if ($i > 0) {
@@ -80,13 +61,13 @@ class AvailabilityController extends Controller
                             ->orWhereBetween('end_time', [$request->start_time, $request->end_time])
                             ->orWhere(function ($q) use ($request) {
                                 $q->where('start_time', '<=', $request->start_time)
-                                  ->where('end_time', '>=', $request->end_time);
+                                ->where('end_time', '>=', $request->end_time);
                             });
                     })
                     ->exists();
 
                 if ($weekOverlapping) {
-                    continue; 
+                    continue;
                 }
             }
 
@@ -95,12 +76,12 @@ class AvailabilityController extends Controller
                 'date' => $currentDate->format('Y-m-d'),
                 'start_time' => $request->start_time,
                 'end_time' => $request->end_time,
-                'repeat_weekly' => $repeatWeekly,
+                'repeat_weekly' => $repeatWeeks > 1,
             ]);
         }
 
-        $message = $repeatWeekly 
-            ? 'Beschikbaarheid toegevoegd en herhaald voor ' . $weeksToRepeat . ' weken.'
+        $message = $repeatWeeks > 1
+            ? 'Beschikbaarheid toegevoegd en herhaald voor ' . $repeatWeeks . ' weken.'
             : 'Beschikbaarheid toegevoegd.';
 
         return redirect()->route('admin.availability.index')->with('success', $message);

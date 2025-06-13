@@ -43,6 +43,12 @@
                         <span class="ml-2">Herhaal elke week (10 weken)</span>
                     </label>
                 </div>
+
+                <div class="mb-4 hidden" id="repeat_weeks_container">
+                    <label for="repeat_weeks" class="block mb-1 font-semibold">Aantal weken herhalen:</label>
+                    <input type="number" name="repeat_weeks" id="repeat_weeks" min="1" max="52" value="1"
+                        class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                </div>
                 
                 <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded transition">
                     Beschikbaarheid Opslaan
@@ -78,15 +84,13 @@
                                 </div>
                                 
                                 @foreach($dayAvailabilities->sortBy('start_time') as $availability)
-                                    <div
-                                        class="flex justify-between items-center px-4 py-3 border-b last:border-0 hover:bg-gray-100 transition">
+                                    <div class="flex justify-between items-center px-4 py-3 border-b last:border-0 hover:bg-gray-100 transition">
                                         <div class="flex-1">
                                             <div class="text-gray-600 text-sm mb-1">
                                                 {{ \Carbon\Carbon::parse($availability->start_time)->format('H:i') }} - 
                                                 {{ \Carbon\Carbon::parse($availability->end_time)->format('H:i') }}
                                             </div>
-                                            <span
-                                                class="inline-block text-xs px-3 py-1 rounded-full bg-green-100 text-green-800">
+                                            <span class="inline-block text-xs px-3 py-1 rounded-full bg-green-100 text-green-800">
                                                 ✓ Beschikbaar
                                             </span>
                                         </div>
@@ -98,6 +102,7 @@
                                                 🗑️
                                             </button>
                                         </form>
+                                        
                                     </div>
                                 @endforeach
                             </div>
@@ -112,183 +117,159 @@
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var calendarEl = document.getElementById('calendar');
-            var calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: 'timeGridWeek',
-                events: {!! $events !!},
-                selectable: true,
-                selectMirror: true,
-                editable: false,
-                validRange: {
-                    start: new Date()
-                },
-                select: function(info) {
-                    fillFormFromSelection(info);
-                    showSelectedInfo(info);
-                    setTimeout(function() {
-                        calendar.unselect();
-                    }, 100);
-                    switchToCreateMode();
-                },
-                eventClick: function(info) {
-                    if (confirm('Wil je deze beschikbaarheid bewerken?')) {
-                        fillFormFromEvent(info.event);
-                        showSelectedInfo({
-                            start: info.event.start,
-                            end: info.event.end
-                        });
-                        switchToEditMode(info.event);
-                    }
-                },
-                headerToolbar: {
-                    left: 'prev,next today',
-                    center: 'title',
-                    right: 'dayGridMonth,timeGridWeek,timeGridDay'
-                },
-                height: 'auto',
-                slotMinTime: '00:00:00',
-                slotMaxTime: '24:00:00',
-                locale: 'nl',
-                slotDuration: '00:30:00',
-                snapDuration: '00:15:00',
-                weekends: true,
-                scrollTime: '08:00:00',
-                slotLabelFormat: {
-                    hour: '2-digit',
-                    minute: '2-digit',
-                    hour12: false
-                }
-            });
-            calendar.render();
+    <div id="editModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 hidden">
+        <div class="bg-white p-6 rounded-lg w-full max-w-md shadow-lg">
+            <h3 class="text-xl font-bold mb-4">Beschikbaarheid Bewerken</h3>
+            <form id="edit-form" method="POST">
+                @csrf
+                @method('PUT')
+                <input type="hidden" id="edit-id">
+                <div class="mb-4">
+                    <label for="edit-date" class="block mb-1 font-semibold">Datum:</label>
+                    <input type="date" id="edit-date" name="date" class="w-full p-2 border rounded" required>
+                </div>
+                <div class="mb-4">
+                    <label for="edit-start" class="block mb-1 font-semibold">Starttijd:</label>
+                    <input type="time" id="edit-start" name="start_time" class="w-full p-2 border rounded" required>
+                </div>
+                <div class="mb-4">
+                    <label for="edit-end" class="block mb-1 font-semibold">Eindtijd:</label>
+                    <input type="time" id="edit-end" name="end_time" class="w-full p-2 border rounded" required>
+                </div>
+                <div class="flex justify-end gap-3">
+                    <button type="button" onclick="closeEditModal()" class="px-4 py-2 bg-gray-500 text-white rounded">Annuleren</button>
+                    <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded">Opslaan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+        @php
+        $calendarEvents = $availabilities->map(function($availability) {
+            return [
+                'id' => $availability->id,
+                'title' => 'Beschikbaar',
+                'start' => $availability->date . 'T' . substr($availability->start_time, 0, 5),
+                'end' => $availability->date . 'T' . substr($availability->end_time, 0, 5),
+                'allDay' => false,
+                'color' => '#34D399',
+            ];
         });
+        @endphp
 
-        function fillFormFromSelection(info) {
-            var startDate = new Date(info.start);
-            var endDate = new Date(info.end);
-            var dateStr = startDate.getFullYear() + '-' + 
-                        String(startDate.getMonth() + 1).padStart(2, '0') + '-' + 
-                        String(startDate.getDate()).padStart(2, '0');
-            var startTimeStr = String(startDate.getHours()).padStart(2, '0') + ':' + 
-                            String(startDate.getMinutes()).padStart(2, '0');
-            var endTimeStr = String(endDate.getHours()).padStart(2, '0') + ':' + 
-                            String(endDate.getMinutes()).padStart(2, '0');
-            document.getElementById('date').value = dateStr;
-            document.getElementById('start_time').value = startTimeStr;
-            document.getElementById('end_time').value = endTimeStr;
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+    <script>
+        const availabilityEvents = @json($calendarEvents);
 
-            document.querySelector('input[name="repeat_weekly"]').checked = false;
-
-            clearHiddenInputs();
+        function closeEditModal() {
+            document.getElementById('editModal').classList.add('hidden');
         }
 
-        function fillFormFromEvent(event) {
-            var startDate = event.start;
-            var endDate = event.end;
-            var dateStr = startDate.getFullYear() + '-' + 
-                        String(startDate.getMonth() + 1).padStart(2, '0') + '-' + 
-                        String(startDate.getDate()).padStart(2, '0');
-            var startTimeStr = String(startDate.getHours()).padStart(2, '0') + ':' + 
-                            String(startDate.getMinutes()).padStart(2, '0');
-            var endTimeStr = String(endDate.getHours()).padStart(2, '0') + ':' + 
-                            String(endDate.getMinutes()).padStart(2, '0');
-            document.getElementById('date').value = dateStr;
-            document.getElementById('start_time').value = startTimeStr;
-            document.getElementById('end_time').value = endTimeStr;
-
-            document.querySelector('input[name="repeat_weekly"]').checked = false;
-
-            var form = document.getElementById('availability-form');
-            var hiddenId = form.querySelector('input[name="availability_id"]');
-            if (!hiddenId) {
-                hiddenId = document.createElement('input');
-                hiddenId.type = 'hidden';
-                hiddenId.name = 'availability_id';
-                form.appendChild(hiddenId);
-            }
-            hiddenId.value = event.id;
-        }
-
-        function switchToEditMode(event) {
-            var form = document.getElementById('availability-form');
-            form.action = `/admin/availability/${event.id}`;
-            form.method = 'POST';
-
-            var methodInput = form.querySelector('input[name="_method"]');
-            if (!methodInput) {
-                methodInput = document.createElement('input');
-                methodInput.type = 'hidden';
-                methodInput.name = '_method';
-                form.appendChild(methodInput);
-            }
-            methodInput.value = 'PUT';
-
-            var submitBtn = form.querySelector('button[type="submit"]');
-            submitBtn.textContent = 'Beschikbaarheid Bijwerken';
-
-            if (!document.getElementById('cancel-edit')) {
-                var cancelBtn = document.createElement('button');
-                cancelBtn.type = 'button';
-                cancelBtn.id = 'cancel-edit';
-                cancelBtn.className = 'w-full mt-3 bg-gray-600 hover:bg-gray-700 text-white py-2 rounded transition';
-                cancelBtn.textContent = 'Bewerking annuleren';
-                cancelBtn.onclick = switchToCreateMode;
-                form.appendChild(cancelBtn);
-            }
-        }
-
-        function switchToCreateMode() {
-            var form = document.getElementById('availability-form');
-            form.action = "{{ route('admin.availability.store') }}";
-            form.method = 'POST';
-
-            var methodInput = form.querySelector('input[name="_method"]');
-            if (methodInput) {
-                methodInput.remove();
-            }
-
-            clearHiddenInputs();
-
-            form.reset();
-
-            var submitBtn = form.querySelector('button[type="submit"]');
-            submitBtn.textContent = 'Beschikbaarheid Opslaan';
-
-            document.getElementById('selected-info').classList.add('hidden');
-
-            var cancelBtn = document.getElementById('cancel-edit');
-            if (cancelBtn) {
-                cancelBtn.remove();
-            }
-        }
-
-        function clearHiddenInputs() {
-            var form = document.getElementById('availability-form');
-            var hiddenId = form.querySelector('input[name="availability_id"]');
-            if (hiddenId) {
-                hiddenId.remove();
-            }
-        }
-
-        function showSelectedInfo(info) {
-            var startDate = new Date(info.start);
-            var endDate = new Date(info.end);
-            var dateStr = startDate.toLocaleDateString('nl-NL');
-            var startTimeStr = startDate.toLocaleTimeString('nl-NL', {hour: '2-digit', minute: '2-digit'});
-            var endTimeStr = endDate.toLocaleTimeString('nl-NL', {hour: '2-digit', minute: '2-digit'});
-            var el = document.getElementById('selected-info');
-            document.getElementById('selected-details').innerHTML = 
-                dateStr + ' van ' + startTimeStr + ' tot ' + endTimeStr;
-            el.classList.remove('hidden');
+        function openEditFromList(id, date, start, end) {
+            document.getElementById('edit-id').value = id;
+            document.getElementById('edit-date').value = date;
+            document.getElementById('edit-start').value = start;
+            document.getElementById('edit-end').value = end;
+            document.getElementById('edit-form').action = `/admin/availability/${id}`;
+            document.getElementById('editModal').classList.remove('hidden');
         }
 
         function clearForm() {
-            switchToCreateMode();
+            document.getElementById('availability-form').reset();
+            document.getElementById('selected-info').classList.add('hidden');
+            document.getElementById('selected-details').innerHTML = '';
         }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const calendarEl = document.getElementById('calendar');
+
+            const calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'timeGridWeek',
+                selectable: true,
+                selectMirror: true,
+                editable: false,
+                locale: 'nl',
+                slotMinTime: '06:00:00',
+                slotMaxTime: '22:00:00',
+                allDaySlot: false,
+                slotDuration: '00:30:00',
+                snapDuration: '00:15:00',
+                scrollTime: '08:00:00',
+                weekends: true,
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'timeGridWeek,timeGridDay'
+                },
+                selectConstraint: {
+                    start: new Date().toISOString().split('T')[0],
+                    end: '2100-01-01'
+                },
+                select: function (info) {
+                    const start = info.start;
+                    const end = info.end;
+
+                    const dateStr = start.toLocaleDateString('en-CA');
+                    const startTimeStr = start.toTimeString().substr(0, 5);
+                    const endTimeStr = end.toTimeString().substr(0, 5);
+
+                    document.getElementById('date').value = dateStr;
+                    document.getElementById('start_time').value = startTimeStr;
+                    document.getElementById('end_time').value = endTimeStr;
+
+                    // Toon geselecteerde periode boven het formulier
+                    const selectedInfo = document.getElementById('selected-info');
+                    const selectedDetails = document.getElementById('selected-details');
+                    selectedDetails.innerHTML = `<p><strong>Datum:</strong> ${dateStr}</p>
+                                                <p><strong>Tijd:</strong> ${startTimeStr} - ${endTimeStr}</p>`;
+                    selectedInfo.classList.remove('hidden');
+
+                    setTimeout(() => {
+                        calendar.unselect();
+                    }, 1000);
+                },
+                selectAllow: function(selectInfo) {
+                    return selectInfo.start >= new Date();
+                },
+                eventClick: function(info) {
+                    const event = info.event;
+                    const start = new Date(event.start);
+                    const end = new Date(event.end);
+
+                    document.getElementById('edit-id').value = event.id;
+                    document.getElementById('edit-date').value = start.toISOString().split('T')[0];
+                    document.getElementById('edit-start').value = start.toTimeString().substr(0, 5);
+                    document.getElementById('edit-end').value = end.toTimeString().substr(0, 5);
+
+                    document.getElementById('edit-form').action = `/admin/availability/${event.id}`;
+                    document.getElementById('editModal').classList.remove('hidden');
+                },
+                events: availabilityEvents,
+            });
+
+            calendar.render();
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const checkbox = document.querySelector('input[name="repeat_weekly"]');
+            const weeksContainer = document.getElementById('repeat_weeks_container');
+
+            function toggleWeeksInput() {
+                if (checkbox.checked) {
+                    weeksContainer.classList.remove('hidden');
+                } else {
+                    weeksContainer.classList.add('hidden');
+                    // Optioneel: reset het aantal weken naar 1 als verbergen
+                    document.getElementById('repeat_weeks').value = 1;
+                }
+            }
+
+            // Initial check bij laden pagina
+            toggleWeeksInput();
+
+            // Luister naar veranderingen op checkbox
+            checkbox.addEventListener('change', toggleWeeksInput);
+        });
     </script>
 
+
 </x-app-layout>
-``
