@@ -43,18 +43,6 @@
                      <a href="{{ route('trainings') }}" class="hover:text-[#DDA15E] transition-all duration-150 {{ request()->routeIs('trainings') ? 'underline' : '' }}">
                         Trainingen
                     </a>
-
-                    @auth
-                        @if (auth()->user()->role !== 'admin')
-                        <a href="{{ route('mytrainings') }}" class="hover:text-[#DDA15E] transition-all duration-150 {{ request()->routeIs('mytrainings') ? 'underline' : '' }}">
-                            Mijn Trainingen
-                        </a>
-                        @else
-                        <a href="{{ route('admin') }}" class="hover:text-[#DDA15E] transition-all duration-150 {{ request()->routeIs('admin') ? 'underline' : '' }}">
-                            Admin dashboard
-                        </a>
-                        @endif
-                    @endauth
                 </div>
             </div>
 
@@ -65,16 +53,13 @@
                         <i class="fa-solid fa-cart-shopping"></i>
                 </a>
                 @auth
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-                        <button class="hover:text-[#DDA15E] transition-all duration-150 gap-2">Uitloggen <i class="fa-solid fa-right-from-bracket"></i></button>
-                    </form>
+                    <button class="hover:text-[#DDA15E] text-xl transition-all duration-150" onclick="toggleProfileDropdown()">
+                        <i class="fa-solid fa-user"></i> <i id="arrow" class="fa fa-caret-up"></i>
+                    </button>
                 @else
                     <a href="{{ route('login') }}" class=" hover:text-[#DDA15E] text-xl transition-all duration-150">
                         <i class="fa-solid fa-user"></i>
                     </a>
-                    {{-- <span class="text-sm">/</span>
-                    <a href="{{ route('register') }}" class="text-sm hover:text-[#DDA15E] transition-all duration-150">Register</a> --}}
                 @endauth
             </div>
 
@@ -142,6 +127,23 @@
             @endauth
         </div>
     </div>
+    {{-- profile dropdown --}}
+    @auth
+    <div id="profile-dropdown" class="hidden absolute right-0 mt-2 mr-2 w-48 bg-[#606C38] rounded-md shadow-lg z-50">
+        <div class="py-1">
+            <a href="{{route('profile.edit')}}" class="block px-4 py-2 text-sm text-[#FEFAE0] hover:text-[#DDA15E] transition-all hover:bg-[#283618]">Profiel</a>
+            @if (auth()->user()->role !== 'admin')
+            <a href="{{route('mytrainings')}}" class="block px-4 py-2 text-sm text-[#FEFAE0] hover:text-[#DDA15E] transition-all hover:bg-[#283618]">Mijn Trainingen</a>
+            @else
+            <a href="{{route('admin')}}" class="block px-4 py-2 text-sm text-[#FEFAE0] hover:text-[#DDA15E] transition-all hover:bg-[#283618]">Admin Dashboard</a>
+            @endif
+            <form method="POST" action="{{ route('logout') }}" class="block px-4 py-2 text-sm text-[#FEFAE0] hover:text-[#DDA15E] transition-all hover:bg-[#283618]">
+                @csrf
+                <button class="gap-2"><i class="fa-solid fa-right-from-bracket"></i> Uitloggen</button>
+            </form>
+        </div>
+    </div>
+    @endauth
 </nav>
 
 {{-- content --}}
@@ -208,7 +210,22 @@
             nav.classList.remove('bg-opacity-85');
         }
     });
+
+    // Profile dropdown toggle
+    function toggleProfileDropdown() {
+        const dropdown = document.getElementById('profile-dropdown');
+        const arrow = document.getElementById('arrow');
+        arrow.classList.toggle('fa-caret-up');
+        arrow.classList.toggle('fa-caret-down');
+        dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+        dropdown.classList.toggle('show');
+    }
 </script>
+<style>
+    .show {
+        display: block;
+    }
+</style>
 </body>
 
 </html>
