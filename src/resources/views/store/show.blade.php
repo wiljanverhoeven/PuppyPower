@@ -1,7 +1,8 @@
 <x-app-layout>
     {{-- return to webshop --}}
     <div class="container mx-auto px-4 py-6">
-        <a href="{{ route('store.index') }}" class="inline-block mb-6 text-[#DDA15E] hover:text-[#BC6C25] transition-all ease-in-out">← Naar de webshop</a>
+        <a href="{{ route('store.index') }}" class="inline-block mb-6 text-[#DDA15E] hover:text-[#BC6C25] transition-all ease-in-out">
+            <i class="fa-solid fa-circle-arrow-left"></i> Naar de webshop</a>
         
         <div class="flex flex-col lg:flex-row justify-center gap-8 lg:gap-16">
             {{-- item image --}}
