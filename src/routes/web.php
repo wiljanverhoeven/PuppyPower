@@ -9,6 +9,7 @@ use App\Http\Controllers\TrainingController;
 use App\Http\Controllers\MytrainingsController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Admin\AvailabilityController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Admin\OrderController as adminOrderController;
 use App\Http\Controllers\Admin\TrainingController as AdminTrainingController;
 use App\Http\Controllers\Admin\ModuleController as AdminModuleController;
@@ -36,11 +37,6 @@ Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::post('/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
 Route::post('/cart/update/{product}', [CartController::class, 'update'])->name('cart.update');
 Route::post('/cart/remove/{product}', [CartController::class, 'remove'])->name('cart.remove');
-
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
 // Training page routes
 Route::get ('/training', [TrainingController::class, 'index']) ->name('trainings');
@@ -82,11 +78,14 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('availability', AvailabilityController::class);
 });
 
-
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
     Route::resource('availability', AvailabilityController::class)->except(['show']);
 });
 
+//user dashboard
+Route::get('/dashboard', [DashboardController::class, 'index'])
+    ->middleware(['auth'])
+    ->name('dashboard');
 
 // Auth
 Route::middleware('auth')->group(function () {

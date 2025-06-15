@@ -4,7 +4,6 @@
             {{ __('Dashboard') }}
         </h2>
     </x-slot>
-
     <div class="py-12">
         <div class="w-full text-center">
             <div class="bg-[#606C38] w-1/3 h-16 rounded-lg flex items-center justify-center mx-auto">
@@ -18,4 +17,32 @@
             </div>
         </div>
     </div>
+{{--    Orders--}}
+    <div class="py-12">
+        <div class="w-full text-center">
+            <div class="bg-[#606C38] w-2/3 rounded-lg flex items-center justify-center mx-auto flex-col">
+                <div class="text-[#FEFAE0] ">
+                    {{ "Bekijk hier al je orders" }}
+                </div>
+                <ul class="text-[#FEFAE0] flex flex-col">
+                    @forelse ($orders as $order)
+                        <div style="margin-bottom: 20px;">
+                            <h3>Order #{{ $order->id }} ({{ $order->created_at->format('d M Y') }})</h3>
+                            <ul>
+                                @foreach ($order->orderItems as $item)
+                                    <li>
+                                       Product: {{ $item->product->name ?? 'Product not found' }} - Aantal: {{ $item->amount }} - Prijs: {{ $item->prijs }}
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @empty
+                        <p>You have no orders yet.</p>
+                    @endforelse
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
 </x-app-layout>
