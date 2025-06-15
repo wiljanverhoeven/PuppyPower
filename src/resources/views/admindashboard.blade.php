@@ -46,7 +46,7 @@
                     </div>
                 </a>
 
-                <a href="#" class="bg-[#DDA15E] rounded-lg p-4 shadow-md hover:bg-[#BC6C25] hover:text-[#FEFAE0] transition-colors duration-300">
+                <a href="{{ route('admin.users.index') }}" class="bg-[#DDA15E] rounded-lg p-4 shadow-md hover:bg-[#BC6C25] hover:text-[#FEFAE0] transition-colors duration-300">
                     <div class="flex items-center gap-2">
                         <div class="">
                             <i class="fas fa-users text-xl"></i>
