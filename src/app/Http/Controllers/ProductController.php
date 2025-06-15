@@ -9,6 +9,7 @@ class ProductController extends Controller
 {
     public function index(Request $request)
     {
+        //get products
         $query = Product::query();
 
         if ($request->filled('search')) {

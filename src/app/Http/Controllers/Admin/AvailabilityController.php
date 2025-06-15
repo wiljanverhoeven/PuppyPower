@@ -10,6 +10,7 @@ class AvailabilityController extends Controller
 {
     public function index()
     {
+        //get availability
         $availabilities = Availability::orderBy('date')->orderBy('start_time')->get();
 
         $events = $availabilities->map(function ($a) {
@@ -39,7 +40,8 @@ class AvailabilityController extends Controller
     }
 
     public function store(Request $request)
-    {
+    {   
+        //add availability
         $request->validate([
             'date' => 'required|date|after_or_equal:today',
             'start_time' => 'required|date_format:H:i',
@@ -50,9 +52,11 @@ class AvailabilityController extends Controller
         $repeatWeeks = $request->input('repeat_weeks', 1);
         $date = \Carbon\Carbon::parse($request->date);
 
+        //repeat
         for ($i = 0; $i < $repeatWeeks; $i++) {
             $currentDate = $date->copy()->addWeeks($i);
 
+            //check for overlap
             if ($i > 0) {
                 $weekOverlapping = Availability::where('admin_id', auth()->id())
                     ->where('date', $currentDate->format('Y-m-d'))
@@ -104,13 +108,13 @@ class AvailabilityController extends Controller
 
     public function update(Request $request, Availability $availability)
     {
-
+        //update availability
         $request->validate([
             'date' => 'required|date',
             'start_time' => 'required|date_format:H:i',
             'end_time' => 'required|date_format:H:i|after:start_time',
         ]);
-
+        //check for overlap
         $overlapping = Availability::where('admin_id', auth()->id())
             ->where('id', '!=', $availability->id)
             ->where('date', $request->date)

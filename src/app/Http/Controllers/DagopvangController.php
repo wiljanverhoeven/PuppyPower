@@ -14,6 +14,7 @@ class DagopvangController extends Controller
 {
     public function index()
     {
+        //get availability
         $appointments = Appointment::with('availability')->get();
 
         $availabilities = Availability::where('date', '>=', Carbon::today())
