@@ -8,6 +8,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TrainingController;
 use App\Http\Controllers\MytrainingsController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\DagopvangController;
 use App\Http\Controllers\Admin\AvailabilityController;
 use App\Http\Controllers\Admin\OrderController as adminOrderController;
 use App\Http\Controllers\Admin\TrainingController as AdminTrainingController;
@@ -18,6 +19,7 @@ use App\Http\Controllers\Admin\ProductController as AdminProductController;
 Route::get('/', function () {
     return view('home');
 })->name('home');
+
 // Contact form routes
 Route::get('/contact', function () {
     return view('contact');
@@ -37,6 +39,10 @@ Route::post('/cart/checkout', [CartController::class, 'checkout'])->name('cart.c
 Route::post('/cart/update/{product}', [CartController::class, 'update'])->name('cart.update');
 Route::post('/cart/remove/{product}', [CartController::class, 'remove'])->name('cart.remove');
 
+// Dagopvang routes
+Route::get('/dagopvang', [DagopvangController::class, 'index'])->name('dagopvang.index');
+Route::get('/dagopvang/afspraak', [DagopvangController::class, 'create'])->name('dagopvang.create');
+Route::post('/dagopvang', [DagopvangController::class, 'store'])->name('dagopvang.store');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -82,16 +88,14 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('availability', AvailabilityController::class);
 });
 
-
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
     Route::resource('availability', AvailabilityController::class)->except(['show']);
 });
 
-
 // Auth
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name(name: 'profile.update');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 

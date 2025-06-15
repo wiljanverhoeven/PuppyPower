@@ -40,7 +40,7 @@
                 <div class="mb-4">
                     <label class="inline-flex items-center">
                         <input type="checkbox" name="repeat_weekly" value="1" class="form-checkbox text-blue-600" />
-                        <span class="ml-2">Herhaal elke week (10 weken)</span>
+                        <span class="ml-2">Herhaal meerdere weken</span>
                     </label>
                 </div>
 
