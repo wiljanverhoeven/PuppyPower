@@ -14,7 +14,7 @@ return new class extends Migration
             $table->unsignedBigInteger('order_id');
             $table->unsignedBigInteger('product_id');
             $table->integer('amount');
-            $table->double('prijs', 8, 2); // prijs per stuk
+            $table->double('price', 8, 2); // prijs per piece
             $table->timestamps();
 
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');

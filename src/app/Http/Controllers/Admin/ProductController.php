@@ -10,6 +10,7 @@ class ProductController extends Controller
 {
     public function index()
     {
+        //get products
         $products = Product::paginate(15);
         return view('admin.producten.index', compact('products'));
     }
@@ -21,6 +22,7 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
+        //add product
         $validated = $request->validate([
             'name' => 'required',
             'description' => 'nullable',
@@ -39,6 +41,7 @@ class ProductController extends Controller
 
     public function update(Request $request, Product $product)
     {
+        //update product
         $validated = $request->validate([
             'name' => 'required',
             'description' => 'nullable',

@@ -4,7 +4,7 @@
     <div class="grid grid-cols-1 md:grid-cols-[1fr_350px] gap-5 my-5">
         <div class="min-h-[600px]">
             <h2 class="text-2xl font-semibold mb-2">Beschikbaarheid Kalender</h2>
-            <p class="mb-4"><strong>Instructies:</strong> Klik en sleep op de kalender om een nieuwe beschikbaarheid te selecteren, of gebruik het formulier rechts.</p>
+            <p class="mb-4"><strong>Instructies:</strong> Klik en sleep op de kalender om een nieuwe beschikbaarheid te selecteren, of gebruik het formulier rechts. Pas aan door op de gewilde beschikbaarheid te klikken in de kalender en verwijder in de lijst.</p>
             <div id='calendar'></div>
         </div>
         
@@ -18,41 +18,42 @@
             
             <form method="POST" action="{{ route('admin.availability.store') }}" id="availability-form">
                 @csrf
-                
+                <!--date selection-->
                 <div class="mb-4">
                     <label for="date" class="block mb-1 font-semibold">Datum:</label>
                     <input type="date" name="date" id="date" required
                         class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" />
                 </div>
-
+                <!--start time selection -->
                 <div class="mb-4">
                     <label for="start_time" class="block mb-1 font-semibold">Starttijd:</label>
                     <input type="time" name="start_time" id="start_time" required
                         class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" />
                 </div>
-
+                <!--end time selection -->
                 <div class="mb-4">
                     <label for="end_time" class="block mb-1 font-semibold">Eindtijd:</label>
                     <input type="time" name="end_time" id="end_time" required
                         class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" />
                 </div>
-                
+                <!--repeat checkbox -->
                 <div class="mb-4">
                     <label class="inline-flex items-center">
                         <input type="checkbox" name="repeat_weekly" value="1" class="form-checkbox text-blue-600" />
                         <span class="ml-2">Herhaal meerdere weken</span>
                     </label>
                 </div>
-
+                <!--repeat amount of weeks selection -->
                 <div class="mb-4 hidden" id="repeat_weeks_container">
                     <label for="repeat_weeks" class="block mb-1 font-semibold">Aantal weken herhalen:</label>
                     <input type="number" name="repeat_weeks" id="repeat_weeks" min="1" max="52" value="1"
                         class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" />
                 </div>
-                
+                <!--save-->
                 <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded transition">
                     Beschikbaarheid Opslaan
                 </button>
+                <!--delete-->
                 <button type="button" onclick="clearForm()"
                     class="w-full mt-3 bg-gray-600 hover:bg-gray-700 text-white py-2 rounded transition">
                     Formulier Wissen
@@ -70,7 +71,7 @@
                         <strong>{{ $totalAvailable }}</strong> beschikbaar
                     </div>
                 </div>
-                
+                <!--list of all availabilities -->
                 <div>
                     @if($availabilities->count() > 0)
                         @php
@@ -94,6 +95,7 @@
                                                 ✓ Beschikbaar
                                             </span>
                                         </div>
+                                        <!--delete availability-->
                                         <form method="POST" action="{{ route('admin.availability.destroy', $availability->id) }}" style="display: inline;">
                                             @csrf
                                             @method('DELETE')
@@ -116,10 +118,12 @@
             </div>
         </div>
     </div>
-
+    <!--overlay for editing availabilities-->
     <div id="editModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 hidden">
         <div class="bg-white p-6 rounded-lg w-full max-w-md shadow-lg">
             <h3 class="text-xl font-bold mb-4">Beschikbaarheid Bewerken</h3>
+            
+            <!-- Bewerk-formulier -->
             <form id="edit-form" method="POST">
                 @csrf
                 @method('PUT')
@@ -141,8 +145,21 @@
                     <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded">Opslaan</button>
                 </div>
             </form>
+
+            <!--deletion form-->
+            <form id="delete-form" method="POST" action="{{ route('admin.availability.destroy', 0) }}" class="mt-4">
+                @csrf
+                @method('DELETE')
+                <input type="hidden" id="delete-id" name="availability_id">
+                <button type="submit"
+                        class="text-white bg-red-600 hover:bg-red-700 px-3 py-2 rounded w-full text-center transition"
+                        onclick="return confirm('Weet je zeker dat je deze beschikbaarheid wilt verwijderen?')"
+                        title="Verwijderen">
+                    🗑️ Verwijder deze beschikbaarheid
+                </button>
+            </form>
         </div>
-    </div>
+     </div>
         @php
         $calendarEvents = $availabilities->map(function($availability) {
             return [
@@ -178,7 +195,7 @@
             document.getElementById('selected-info').classList.add('hidden');
             document.getElementById('selected-details').innerHTML = '';
         }
-
+        //calender selection
         document.addEventListener('DOMContentLoaded', function () {
             const calendarEl = document.getElementById('calendar');
 
@@ -216,7 +233,6 @@
                     document.getElementById('start_time').value = startTimeStr;
                     document.getElementById('end_time').value = endTimeStr;
 
-                    // Toon geselecteerde periode boven het formulier
                     const selectedInfo = document.getElementById('selected-info');
                     const selectedDetails = document.getElementById('selected-details');
                     selectedDetails.innerHTML = `<p><strong>Datum:</strong> ${dateStr}</p>
@@ -230,6 +246,8 @@
                 selectAllow: function(selectInfo) {
                     return selectInfo.start >= new Date();
                 },
+
+                //open edit modal
                 eventClick: function(info) {
                     const event = info.event;
                     const start = new Date(event.start);
@@ -241,6 +259,9 @@
                     document.getElementById('edit-end').value = end.toTimeString().substr(0, 5);
 
                     document.getElementById('edit-form').action = `/admin/availability/${event.id}`;
+                    document.getElementById('delete-form').action = `/admin/availability/${event.id}`;
+                    document.getElementById('delete-form').classList.remove('hidden');
+
                     document.getElementById('editModal').classList.remove('hidden');
                 },
                 events: availabilityEvents,
@@ -252,21 +273,19 @@
         document.addEventListener('DOMContentLoaded', function () {
             const checkbox = document.querySelector('input[name="repeat_weekly"]');
             const weeksContainer = document.getElementById('repeat_weeks_container');
-
+            //toggle for repeat amount selection
             function toggleWeeksInput() {
                 if (checkbox.checked) {
                     weeksContainer.classList.remove('hidden');
                 } else {
                     weeksContainer.classList.add('hidden');
-                    // Optioneel: reset het aantal weken naar 1 als verbergen
                     document.getElementById('repeat_weeks').value = 1;
                 }
             }
 
-            // Initial check bij laden pagina
             toggleWeeksInput();
 
-            // Luister naar veranderingen op checkbox
+            //wait for checkbox change
             checkbox.addEventListener('change', toggleWeeksInput);
         });
     </script>
