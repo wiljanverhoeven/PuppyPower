@@ -38,7 +38,7 @@ class DatabaseSeeder extends Seeder
 
         Product::factory()->count(20)->create();
 
-        //pluck all training ids
+// Pluck all training IDs
         $trainingIds = Training::pluck('training_id')->toArray();
 
         Module::factory(12)->create([
@@ -47,12 +47,17 @@ class DatabaseSeeder extends Seeder
             },
         ]);
 
-        // Pluck all module ids
+// Pluck all module IDs
         $moduleIds = Module::pluck('module_id')->toArray();
 
         Media::factory(30)->create([
             'module_id' => function () use ($moduleIds) {
                 return $moduleIds[array_rand($moduleIds)];
+            },
+            'path' => function () {
+                return rand(0, 1)
+                    ? 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&list=RDdQw4w9WgXcQ&start_radio=1'
+                    : 'media_images/images.jpg';
             },
         ]);
     }
