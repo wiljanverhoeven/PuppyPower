@@ -79,7 +79,7 @@
                         <h2 class="text-xl text-[#FEFAE0] font-bold">Dagopvang</h2>
                         <p class="text-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                         <button class="bg-[#DDA15E] hover:bg-[#BC6C25] text-[#FEFAE0] w-full py-2 rounded-md transition-all ease-in-out">
-                            <a href="#" class="flex flex-wrap justify-center items-center text-center gap-2">Naar Dagopvang <i class="fa-solid fa-circle-arrow-right"></i></a>
+                            <a href="{{ route('dagopvang.index') }}" class="flex flex-wrap justify-center items-center text-center gap-2">Naar Dagopvang <i class="fa-solid fa-circle-arrow-right"></i></a>
                         </button>
                     </div>
                 </div>

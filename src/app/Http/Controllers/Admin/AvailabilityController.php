@@ -89,10 +89,6 @@ class AvailabilityController extends Controller
 
     public function destroy(Availability $availability)
     {
-        if ($availability->admin_id !== auth()->id()) {
-            return redirect()->route('admin.availability.index')
-                ->with('error', 'Je kunt alleen je eigen beschikbaarheid verwijderen.');
-        }
 
         $availability->delete();
 
@@ -102,20 +98,12 @@ class AvailabilityController extends Controller
 
     public function edit(Availability $availability)
     {
-        if ($availability->admin_id !== auth()->id()) {
-            return redirect()->route('admin.availability.index')
-                ->with('error', 'Je kunt alleen je eigen beschikbaarheid bewerken.');
-        }
 
         return view('admin.availability.edit', compact('availability'));
     }
 
     public function update(Request $request, Availability $availability)
     {
-        if ($availability->admin_id !== auth()->id()) {
-            return redirect()->route('admin.availability.index')
-                ->with('error', 'Je kunt alleen je eigen beschikbaarheid bewerken.');
-        }
 
         $request->validate([
             'date' => 'required|date',
