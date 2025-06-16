@@ -16,7 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('description');
             $table->date('date')->nullable();
-            $table->string('type');
+            $table->enum('type',['Live', 'Online'])->default('Online');
+            $table->enum('age',['puppy','adult'])->default('puppy');
             $table->decimal('price');
             $table->timestamps();
         });

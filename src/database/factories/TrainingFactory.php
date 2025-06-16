@@ -32,6 +32,7 @@ class TrainingFactory extends Factory
             'date' => $this->faker->date(),
             'type' => $method['type'],
             'price' => $this->faker->randomFloat(2, 50, 200),
+            'age' => $this->faker->randomElement(['puppy', 'adult']),
         ];
     }
 }

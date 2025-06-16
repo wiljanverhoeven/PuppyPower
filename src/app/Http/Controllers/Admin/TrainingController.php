@@ -38,6 +38,7 @@ class TrainingController extends Controller
             'date' => 'nullable|date',
             'type' => 'required|string|max:255',
             'price' => 'required|numeric|min:0',
+            'age' => 'required|in:puppy,adult',
         ]);
 
         $training = new Training();
@@ -46,6 +47,7 @@ class TrainingController extends Controller
         $training->date = $validated['date'] ?? null;
         $training->type = $validated['type'];
         $training->price = $validated['price'];
+        $training->age = $validated['age'];
         $training->save();
 
         return redirect()->route('trainings.index')->with('success', 'Training created successfully!');
@@ -78,8 +80,9 @@ class TrainingController extends Controller
             'name' => 'required|string|max:255',
             'description' => 'required|string',
             'date' => 'required|date',
-            'type' => 'required|string|max:255',
+            'type' => 'required|in:Live,Online',
             'price' => 'required|numeric',
+            'age' => 'required|in:puppy,adult',
         ]);
 
         $training = Training::findOrFail($id);

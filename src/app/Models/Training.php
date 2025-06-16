@@ -18,6 +18,7 @@ class Training extends Model
         'date',
         'type',
         'price',
+        'age',
     ];
 
     public function modules()

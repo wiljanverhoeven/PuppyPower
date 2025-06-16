@@ -19,19 +19,25 @@
                         <div class="w-full h-48 md:h-56 flex items-center justify-center p-4">
                             <img src="{{ asset('/images/placeholder.jpg') }}" alt="{{ $mytraining->training->name }}" class="w-full h-full object-cover rounded-lg">
                         </div>
-                        
+
                         {{-- info --}}
                         <div class="w-full h-auto px-4 pb-3 flex-grow">
                             <h2 class="text-xl font-semibold">{{ $mytraining->training->name }}</h2>
                             <p>Aantal modules: {{ $mytraining->training->modules->count() }}</p>
                             <p class="text-sm italic truncate">{{ $mytraining->training->description }}</p>
                         </div>
-                        
+
                         <div class="w-full pb-4 px-4">
-                            <button onclick="window.location.href='{{ route('mytrainings.startTraining', ['id' => $mytraining->mytraining_id]) }}'" 
+                            @if ($mytraining->training->type == 'Online')
+                            <button onclick="window.location.href='{{ route('mytrainings.startTraining', ['id' => $mytraining->mytraining_id]) }}'"
                                     class="flex flex-row items-center justify-center gap-2 bg-[#DDA15E] hover:bg-[#BC6C25] text-[#FEFAE0] w-full py-2 rounded-md transition-all ease-in-out duration-300">
                                 <i class="fas fa-play"></i> Begin training
                             </button>
+                            @else
+                                <button class="flex flex-row items-center justify-center gap-2 bg-[#3B82F6] text-[#DBEAFE] w-full py-2 rounded-md transition-all ease-in-out duration-300">
+                                    <i class="fas fa-info"></i> Wacht op e-mail
+                                </button>
+                            @endif
                         </div>
                     </div>
                 @endforeach

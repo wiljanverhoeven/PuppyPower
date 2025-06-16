@@ -34,7 +34,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
 
-        Training::factory(3)->create();
+        Training::factory(5)->create();
 
         Product::factory()->count(20)->create();
 

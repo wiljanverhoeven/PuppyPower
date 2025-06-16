@@ -44,10 +44,28 @@
                     <!-- Type Field -->
                     <div>
                         <label for="type" class="block text-sm font-medium text-[#FEFAE0]">Type</label>
-                        <input type="text" name="type" id="type" value="{{ old('type', $training->type) }}" required
-                               class="mt-1 block w-full rounded-md border-[#DDA15E] bg-[#FEFAE0] text-[#283618] shadow-sm focus:border-[#BC6C25] focus:ring focus:ring-[#BC6C25] focus:ring-opacity-50 p-2">
+                        <select name="type" id="type" required
+                                class="mt-1 block w-full rounded-md border-[#DDA15E] bg-[#FEFAE0] text-[#283618] shadow-sm focus:border-[#BC6C25] focus:ring focus:ring-[#BC6C25] focus:ring-opacity-50 p-2">
+                            <option value="">-- Kies een type --</option>
+                            <option value="Live" {{ old('type', $training->type ?? '') == 'Live' ? 'selected' : '' }}>Live</option>
+                            <option value="Online" {{ old('type', $training->type ?? '') == 'Online' ? 'selected' : '' }}>Online</option>
+                        </select>
                         @error('type')
-                            <p class="mt-1 text-sm text-red-300">{{ $message }}</p>
+                        <p class="mt-1 text-sm text-red-300">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <!-- Age Category Field -->
+                    <div>
+                        <label for="age" class="block text-sm font-medium text-[#FEFAE0]">Leeftijdscategorie</label>
+                        <select name="age" id="age" required
+                                class="mt-1 block w-full rounded-md border-[#DDA15E] bg-[#FEFAE0] text-[#283618] shadow-sm focus:border-[#BC6C25] focus:ring focus:ring-[#BC6C25] focus:ring-opacity-50 p-2">
+                            <option value="">-- Kies een optie --</option>
+                            <option value="puppy" {{ old('age', $training->age) == 'puppy' ? 'selected' : '' }}>Puppy</option>
+                            <option value="adult" {{ old('age', $training->age) == 'adult' ? 'selected' : '' }}>Volwassen</option>
+                        </select>
+                        @error('age')
+                        <p class="mt-1 text-sm text-red-300">{{ $message }}</p>
                         @enderror
                     </div>
 
