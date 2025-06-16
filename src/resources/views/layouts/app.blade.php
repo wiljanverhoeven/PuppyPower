@@ -222,15 +222,24 @@
     function toggleProfileDropdown() {
         const dropdown = document.getElementById('profile-dropdown');
         const arrow = document.getElementById('arrow');
-        arrow.classList.toggle('fa-caret-up');
-        arrow.classList.toggle('fa-caret-down');
+        
+        // Toggle dropdown visibility
         dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
         dropdown.classList.toggle('show');
+        
+        // Toggle arrow rotation
+        arrow.classList.toggle('arrow-down');
     }
 </script>
 <style>
     .show {
         display: block;
+    }
+    #arrow {
+        transition: transform 0.3s ease-in-out;
+    }
+    .arrow-down {
+        transform: rotate(180deg);
     }
 </style>
 </body>
