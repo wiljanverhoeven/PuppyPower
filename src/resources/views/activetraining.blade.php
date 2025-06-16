@@ -1,17 +1,34 @@
 <x-app-layout>
-    <h1>Active Training</h1>
-    <ul>
-        @foreach ($modules as $mymodule)
-            <li id="module" class="flex flex-col mb-4 p-4 border rounded-lg">
-                <div>Titel: {{ $mymodule->module->name }}</div>
-                <div>description: {{ $mymodule->module->description }}</div>
-                <a href="{{ route('mymodules.startModule', $mymodule->mymodule_id) }}"
-                   class="bg-blue-600 p-4 text-white rounded-lg hover:bg-blue-700 inline-block">
-                    Start Module
-                </a>
-            </li>
-        @endforeach
-    </ul>
+    <div class="container mx-auto px-4 py-6">
+        <div class="w-full mb-6 text-center">
+            <h1 class="text-2xl font-bold">Active Training</h1>
+        </div>
+
+        {{-- if there are no modules --}}
+        @if($modules->isEmpty())
+            <div class="bg-[#FEFAE0] rounded-lg p-6 text-center max-w-2xl mx-auto">
+                <p>No active modules available.</p>
+            </div>
+        @else
+            {{-- cards --}}
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                @foreach ($modules as $mymodule)
+                    <div class="bg-[#606C38] text-[#FEFAE0] rounded-lg shadow-lg overflow-hidden hover:scale-[1.02] transition-all duration-300">
+                        <div class="w-full h-48 md:h-56 flex items-center justify-center p-4">
+                            <img src="{{ asset('/images/placeholder.jpg') }}" class="w-full h-full object-cover rounded-lg">
+                        </div>
+                        <div class="px-6 pb-6">
+                            <h2 class="text-xl font-semibold mb-2">{{ $mymodule->module->name }}</h2>
+                            <p class="mb-4">{{ $mymodule->module->description }}</p>
+                            <a href="{{ route('mymodules.startModule', $mymodule->mymodule_id) }}"
+                               class="flex items-center justify-center gap-2 bg-[#DDA15E] hover:bg-[#BC6C25] text-[#FEFAE0] w-full py-2 rounded-md transition-colors duration-200">
+                                <i class="fas fa-play"></i> Start Module
+                            </a>
+                            {{-- there should be a different type of button if the module has been finished. JAY ADD IT!!!! --}}
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        @endif
+    </div>
 </x-app-layout>
-
-
