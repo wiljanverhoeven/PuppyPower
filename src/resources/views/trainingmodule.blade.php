@@ -13,7 +13,7 @@
                         <div class="flex items-center justify-between mb-4">
                             <h2 class="text-2xl font-semibold text-[#FEFAE0]">{{ $media->title }}</h2>
                         </div>
-                        
+
                         @if($media->description)
                             <p class="text-[#FEFAE0] mb-4">{{ $media->description }}</p>
                         @endif
@@ -28,10 +28,10 @@
 
                                 @if ($videoId)
                                     <div class="aspect-w-16 aspect-h-9">
-                                        <iframe class="w-full h-64 md:h-96 rounded-xl" 
+                                        <iframe class="w-full h-64 md:h-96 rounded-xl"
                                                 src="https://www.youtube.com/embed/{{ $videoId ?? 'dQw4w9WgXcQ' }}"
-                                                frameborder="0" 
-                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                                frameborder="0"
+                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                                 allowfullscreen>
                                         </iframe>
                                     </div>
@@ -39,22 +39,22 @@
                                     <p class="text-red-500">Invalid YouTube URL</p>
                                 @endif
                             @else
-                                <img src="{{ asset('storage/' . $media->path) }}" 
-                                     alt="{{ $media->name }}" 
+                                <img src="{{ asset($media->path) }}"
+                                     alt="{{ $media->name }}"
                                      class="w-full h-auto rounded-lg shadow-md">
                             @endif
                         </div>
                     </div>
                     @endforeach
                 </div>
-            
+
         </div>
 
         <div class="mt-8 text-center">
             <form action="{{ route('mymodules.updateModuleStatus', $mymodule->mymodule_id) }}" method="POST">
                 @csrf
                 @method('PATCH')
-                <button type="submit" 
+                <button type="submit"
                         class="px-6 py-3 gap-2 w-2/3 bg-[#DDA15E] hover:bg-[#BC6C25] text-[#FEFAE0] rounded-lg shadow-lg transition-all duration-300 font-semibold">
                     <i class="fas fa-check-circle"></i> Markeer als voltooid
                 </button>
