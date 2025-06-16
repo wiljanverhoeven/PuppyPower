@@ -14,7 +14,7 @@
                     </div>
                     
                     {{-- training info --}}
-                    <div class="w-full h-auto px-4 py-3 flex-grow">
+                    <div class="w-full h-auto px-4 pb-3 flex-grow">
                         <h2 class="text-xl font-semibold">{{ $training->name }}</h2>
                         <p class="text-3xl font-bold">€{{ $training->price }}</p>
                         <p>Aantal modules: {{ $training->modules_count }}</p>
