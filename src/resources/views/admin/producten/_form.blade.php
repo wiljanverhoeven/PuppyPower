@@ -3,7 +3,6 @@
     @method($method ?? 'POST')
 
     <div class="space-y-4">
-        <!-- Name Field -->
         <div>
             <label for="name" class="block text-sm font-medium text-[#FEFAE0]">Naam</label>
             <input type="text" name="name" id="name" value="{{ old('name', $product->name) }}"
@@ -13,7 +12,6 @@
             @enderror
         </div>
 
-        <!-- Price Field -->
         <div>
             <label for="price" class="block text-sm font-medium text-[#FEFAE0]">Prijs</label>
             <input type="number" step="0.01" name="price" id="price" value="{{ old('price', $product->price) }}"
@@ -23,7 +21,6 @@
             @enderror
         </div>
 
-        <!-- Category Field -->
         <div>
             <label for="category" class="block text-sm font-medium text-[#FEFAE0]">Categorie</label>
             <select name="category" id="category"
@@ -38,7 +35,6 @@
             @enderror
         </div>
 
-        <!-- Description Field -->
         <div>
             <label for="description" class="block text-sm font-medium text-[#FEFAE0]">Beschrijving</label>
             <textarea name="description" id="description" rows="3"

@@ -41,9 +41,6 @@
         </div>
 
         <div class="mt-8 text-center">
-            {{-- <a href="{{ route('trainings.create') }}" class="inline-flex items-center px-4 py-2 bg-[#DDA15E] hover:bg-[#BC6C25] text-[#FEFAE0] rounded-md transition-colors duration-300">
-                <i class="fas fa-plus mr-2"></i> Nieuwe training aanmaken
-            </a> --}}
         </div>
     </div>
 </x-app-layout>

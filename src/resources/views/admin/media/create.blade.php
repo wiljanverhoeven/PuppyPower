@@ -10,7 +10,6 @@
                 @csrf
 
                 <div class="space-y-4">
-                    <!-- Title Field -->
                     <div>
                         <label for="title" class="block text-sm font-medium text-[#FEFAE0]">Titel</label>
                         <input type="text" name="title" id="title" value="{{ old('title') }}" required
@@ -20,7 +19,7 @@
                         @enderror
                     </div>
 
-                    <!-- Path/Youtube Field -->
+                    {{-- path/youtube field --}}
                     <div>
                         <label for="path" class="block text-sm font-medium text-[#FEFAE0]">Youtube Link of bestandslocatie</label>
                         <input type="text" name="path" id="path" value="{{ old('path') }}"
@@ -30,7 +29,7 @@
                         @enderror
                     </div>
 
-                    <!-- Image Upload Field -->
+                    {{-- upload image --}}
                     <div>
                         <label for="image" class="block text-sm font-medium text-[#FEFAE0]">Of upload een afbeelding</label>
                         <input type="file" name="image" id="image" accept="image/*"
@@ -40,7 +39,7 @@
                         @enderror
                     </div>
 
-                    <!-- Description Field -->
+                    {{-- desc --}}
                     <div>
                         <label for="description" class="block text-sm font-medium text-[#FEFAE0]">Beschrijving</label>
                         <textarea name="description" id="description" rows="4"
@@ -50,7 +49,7 @@
                         @enderror
                     </div>
 
-                    <!-- Order Field -->
+                    {{-- order --}}
                     <div>
                         <label for="order" class="block text-sm font-medium text-[#FEFAE0]">Volgorde</label>
                         <input type="number" name="order" id="order" value="{{ old('order', 10) }}" min="0"

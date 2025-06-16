@@ -10,7 +10,6 @@
                 @csrf
 
                 <div class="space-y-4">
-                    <!-- Name Field -->
                     <div>
                         <label for="name" class="block text-sm font-medium text-[#FEFAE0]">Naam</label>
                         <input type="text" name="name" id="name" value="{{ old('name') }}" required
@@ -20,7 +19,6 @@
                         @enderror
                     </div>
 
-                    <!-- Description Field -->
                     <div>
                         <label for="description" class="block text-sm font-medium text-[#FEFAE0]">Beschrijving</label>
                         <textarea name="description" id="description" rows="4"
@@ -30,7 +28,6 @@
                         @enderror
                     </div>
 
-                    <!-- Order Field -->
                     <div>
                         <label for="order" class="block text-sm font-medium text-[#FEFAE0]">Volgorde</label>
                         <input type="number" name="order" id="order" value="{{ old('order', 1) }}" min="1" required

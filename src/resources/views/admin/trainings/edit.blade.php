@@ -10,7 +10,6 @@
                 @method('PUT')
 
                 <div class="space-y-4">
-                    <!-- Name Field -->
                     <div>
                         <label for="name" class="block text-sm font-medium text-[#FEFAE0]">Naam</label>
                         <input type="text" name="name" id="name" value="{{ old('name', $training->name) }}" required
@@ -20,7 +19,6 @@
                         @enderror
                     </div>
 
-                    <!-- Description Field -->
                     <div>
                         <label for="description" class="block text-sm font-medium text-[#FEFAE0]">Beschrijving</label>
                         <textarea name="description" id="description" rows="4" required
@@ -30,7 +28,6 @@
                         @enderror
                     </div>
 
-                    <!-- Date Field -->
                     <div>
                         <label for="date" class="block text-sm font-medium text-[#FEFAE0]">Datum</label>
                         <input type="date" name="date" id="date"
@@ -41,7 +38,6 @@
                         @enderror
                     </div>
 
-                    <!-- Type Field -->
                     <div>
                         <label for="type" class="block text-sm font-medium text-[#FEFAE0]">Type</label>
                         <select name="type" id="type" required
@@ -55,7 +51,6 @@
                         @enderror
                     </div>
 
-                    <!-- Age Category Field -->
                     <div>
                         <label for="age" class="block text-sm font-medium text-[#FEFAE0]">Leeftijdscategorie</label>
                         <select name="age" id="age" required
@@ -69,7 +64,6 @@
                         @enderror
                     </div>
 
-                    <!-- Price Field -->
                     <div>
                         <label for="price" class="block text-sm font-medium text-[#FEFAE0]">Prijs (€)</label>
                         <input type="number" step="0.01" name="price" id="price" value="{{ old('price', $training->price) }}" required

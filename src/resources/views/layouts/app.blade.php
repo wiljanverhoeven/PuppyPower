@@ -12,27 +12,26 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Fonts -->
+    {{-- fonts --}}
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
-    <!-- Scripts -->
+    {{-- scripts --}}
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="bg-[#FEFAE0] font-sans antialiased">
 <nav class="bg-[#283618] text-[#FEFAE0] sticky top-0 z-50 transition-all duration-700 ease-in">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
-            <!-- Logo + Nav Links -->
+            {{-- logo + nav --}}
             <div class="flex items-center space-x-6">
-                {{-- <a href="{{ url('/') }}" class="text-xl font-bold ">Logo</a> --}}
                 <div>
                     <a href="{{ url('/') }}" class="text-xl font-bold ">
                         <img src="{{ asset('images/logo.svg') }}" alt="" class="h-20 w-auto">
                     </a>
                 </div>
 
-                <!-- Desktop Links -->
+                {{-- desktop nav --}}
                 <div class="hidden sm:flex space-x-4">
                     <a href="{{ url('/') }}" class="hover:text-[#DDA15E] transition-all duration-150 {{ request()->is('/') ? 'underline' : '' }}">
                         Homepage
@@ -49,8 +48,7 @@
                 </div>
             </div>
 
-            <!-- Desktop Auth -->
-            {{-- replace the path from "/" to login, register and logout when the routes are working --}}
+            {{-- desktop auth --}}
             <div class="hidden sm:flex sm:items-center space-x-4 gap-4">
                 <a href="{{ route('cart.index') }}" class="hover:text-[#DDA15E] text-xl transition-all duration-150" {{ request()->routeIs('cart.index') ? 'underline' : '' }}">
                         <i class="fa-solid fa-cart-shopping"></i>
@@ -66,7 +64,7 @@
                 @endauth
             </div>
 
-            <!-- Mobile hamburger -->
+            {{-- mobile hamburger --}}
             <div class="sm:hidden flex items-center">
                 <div class="space-x-4 gap-4 flex justify-center items-center">
                     <a href="{{ route('cart.index') }}" class="hover:text-[#DDA15E] text-xl transition-all duration-150" {{ request()->routeIs('cart.index') ? 'underline' : '' }}">
@@ -89,7 +87,7 @@
         </div>
     </div>
 
-    <!-- Mobile navbar -->
+    {{-- mobile nav --}}
     <div id="mobile-menu" class="sm:hidden hidden px-4 pb-4">
         <div class="pt-2 pb-3 space-y-1">
             <a href="{{ url('/') }}" class="block px-4 py-2 text-[#FEFAE0] {{ request()->is('/') ? 'font-semibold' : '' }}">

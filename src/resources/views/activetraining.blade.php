@@ -19,7 +19,7 @@
                         </div>
                         <div class="px-6 pb-6">
                             <h2 class="text-xl font-semibold mb-2">{{ $mymodule->module->name }}</h2>
-                            <p class="mb-4">{{ $mymodule->module->description }}</p>
+                            <p class="mb-4 truncate">{{ $mymodule->module->description }}</p>
                             {{-- <a href="{{ route('mymodules.startModule', $mymodule->mymodule_id) }}"
                                class="flex items-center justify-center gap-2 bg-[#DDA15E] hover:bg-[#BC6C25] text-[#FEFAE0] w-full py-2 rounded-md transition-colors duration-200">
                                 <i class="fas fa-play"></i> Start Module

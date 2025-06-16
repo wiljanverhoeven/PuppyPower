@@ -10,7 +10,6 @@
                 @method('PUT')
 
                 <div class="space-y-4">
-                    <!-- Title Field -->
                     <div>
                         <label for="title" class="block text-sm font-medium text-[#FEFAE0]">Titel</label>
                         <input type="text" name="title" id="title" value="{{ old('title', $medium->title) }}" required
@@ -20,7 +19,6 @@
                         @enderror
                     </div>
 
-                    <!-- Path/Youtube Field -->
                     <div>
                         <label for="path" class="block text-sm font-medium text-[#FEFAE0]">Youtube Link</label>
                         <input type="text" name="path" id="path" value="{{ old('path', $medium->path) }}" required
@@ -30,7 +28,6 @@
                         @enderror
                     </div>
 
-                    <!-- Image Upload Field -->
                     <div>
                         <label for="image" class="block text-sm font-medium text-[#FEFAE0]">Of upload een nieuwe afbeelding</label>
                         <p class="text-xs text-[#FEFAE0]/80 mb-1">(overschrijft bovenstaande indien ingevuld)</p>
@@ -41,7 +38,6 @@
                         @enderror
                     </div>
 
-                    <!-- Description Field -->
                     <div>
                         <label for="description" class="block text-sm font-medium text-[#FEFAE0]">Beschrijving</label>
                         <textarea name="description" id="description" rows="4"
@@ -51,7 +47,6 @@
                         @enderror
                     </div>
 
-                    <!-- Order Field -->
                     <div>
                         <label for="order" class="block text-sm font-medium text-[#FEFAE0]">Volgorde</label>
                         <input type="number" name="order" id="order" value="{{ old('order', $medium->order) }}" required min="0"
