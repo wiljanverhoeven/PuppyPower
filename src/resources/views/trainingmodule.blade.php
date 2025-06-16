@@ -61,4 +61,12 @@
             </form>
         </div>
     </div>
+<style>
+    body {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+</style>
 </x-app-layout>
