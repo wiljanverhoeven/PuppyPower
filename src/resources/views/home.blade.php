@@ -1,4 +1,5 @@
 <x-app-layout>
+    <x-flash-message/>
     <div class="">
         {{-- Image Slideshow with Slide Animation --}}
         <div class="relative h-[calc(100vh-4rem)] overflow-hidden p-8">

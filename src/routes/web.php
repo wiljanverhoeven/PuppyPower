@@ -101,6 +101,17 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
 Route::get('/admin/users/{user}/checkprogress', [AdminUserController::class, 'checkProgress'])->name('admin.users.checkprogress');
 
+// Admin user routes
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::resource('users', AdminUserController::class);
+});
+
+Route::get('/admin/users/{user}/checkprogress', [AdminUserController::class, 'checkProgress'])->name('admin.users.checkprogress');
+
+//user dashboard
+Route::get('/dashboard', [DashboardController::class, 'index'])
+    ->middleware(['auth'])
+    ->name('dashboard');
 
 // Auth
 Route::middleware('auth')->group(function () {

@@ -109,6 +109,9 @@
                     <a href="{{ route('mytrainings') }}" class="block px-4 py-2 text-[#FEFAE0] {{ request()->routeIs('mytrainings') ? 'font-semibold' : '' }}">
                         Mijn Trainingen
                     </a>
+                    <a href="{{ route('dashboard') }}" class="block px-4 py-2 text-[#FEFAE0] {{ request()->routeIs('dashboard') ? 'font-semibold' : '' }}">
+                        Mijn Bestellingen
+                    </a>
                 @else
                     <a href="{{ route('admin') }}" class="block px-4 py-2 text-[#FEFAE0] {{ request()->routeIs('admin') ? 'font-semibold' : '' }}">
                         Admin dashboard
@@ -139,6 +142,7 @@
             <a href="{{route('profile.edit')}}" class="block px-4 py-2 text-sm text-[#FEFAE0] hover:text-[#DDA15E] transition-all hover:bg-[#283618]">Profiel</a>
             @if (auth()->user()->role !== 'admin')
             <a href="{{route('mytrainings')}}" class="block px-4 py-2 text-sm text-[#FEFAE0] hover:text-[#DDA15E] transition-all hover:bg-[#283618]">Mijn Trainingen</a>
+            <a href="{{ route('dashboard') }}" class="block px-4 py-2 text-sm text-[#FEFAE0] hover:text-[#DDA15E] transition-all hover:bg-[#283618]">Mijn Bestellingen</a>
             @else
             <a href="{{route('admin')}}" class="block px-4 py-2 text-sm text-[#FEFAE0] hover:text-[#DDA15E] transition-all hover:bg-[#283618]">Admin Dashboard</a>
             @endif
