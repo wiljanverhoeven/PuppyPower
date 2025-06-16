@@ -43,6 +43,9 @@
                      <a href="{{ route('trainings') }}" class="hover:text-[#DDA15E] transition-all duration-150 {{ request()->routeIs('trainings') ? 'underline' : '' }}">
                         Trainingen
                     </a>
+                    <a href="{{ route('dagopvang.index') }}" class="hover:text-[#DDA15E] transition-all duration-150 {{ request()->routeIs('dagopvang.index') ? 'underline' : '' }}">
+                        Dagopvang
+                    </a>
                 </div>
             </div>
 
@@ -97,6 +100,9 @@
             </a>
             <a href="{{ route('trainings')}}" class="block px-4 py-2 text-[#FEFAE0] {{ request()->routeIs('trainings') ? 'font-semibold' : '' }}">
                 Trainingen
+            </a>
+            <a href="{{ route('dagopvang.index')}}" class="block px-4 py-2 text-[#FEFAE0] {{ request()->routeIs('dagopvang.index') ? 'font-semibold' : '' }}">
+                Dagopvang
             </a>
             @auth
                 @if (auth()->user()->role !== 'admin')
