@@ -1,7 +1,7 @@
 <x-app-layout>
     <div class="container mx-auto px-4 py-6">
         <div class="w-full mb-6 text-center">
-            <h1 class="text-2xl font-bold">Active Training</h1>
+            <h1 class="text-2xl font-bold">Active Trainingen</h1>
         </div>
 
         {{-- if there are no modules --}}
@@ -20,11 +20,23 @@
                         <div class="px-6 pb-6">
                             <h2 class="text-xl font-semibold mb-2">{{ $mymodule->module->name }}</h2>
                             <p class="mb-4">{{ $mymodule->module->description }}</p>
+                            {{-- <a href="{{ route('mymodules.startModule', $mymodule->mymodule_id) }}"
+                               class="flex items-center justify-center gap-2 bg-[#DDA15E] hover:bg-[#BC6C25] text-[#FEFAE0] w-full py-2 rounded-md transition-colors duration-200">
+                                <i class="fas fa-play"></i> Start Module
+                            </a> --}}
+                            {{-- there should be a different type of button if the module has been finished. JAY ADD IT!!!! --}}
+                            @if($mymodule->status === 'completed')
+                                
+                            <a href="{{ route('mymodules.startModule', $mymodule->mymodule_id) }}"
+                               class="flex items-center justify-center gap-2 bg-[#DDA15E] hover:bg-[#BC6C25] text-[#FEFAE0] w-full py-2 rounded-md transition-colors duration-200">
+                                <i class="fa-solid fa-check"></i> module afgerond
+                            </a>
+                            @else
                             <a href="{{ route('mymodules.startModule', $mymodule->mymodule_id) }}"
                                class="flex items-center justify-center gap-2 bg-[#DDA15E] hover:bg-[#BC6C25] text-[#FEFAE0] w-full py-2 rounded-md transition-colors duration-200">
                                 <i class="fas fa-play"></i> Start Module
                             </a>
-                            {{-- there should be a different type of button if the module has been finished. JAY ADD IT!!!! --}}
+                            @endif
                         </div>
                     </div>
                 @endforeach
