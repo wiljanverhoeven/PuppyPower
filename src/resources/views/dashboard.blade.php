@@ -11,26 +11,22 @@
                 {{-- Multi-item order styling --}}
                 <div class="bg-[#606C38] text-[#FEFAE0] rounded-lg w-full max-w-4xl mb-6 p-4 shadow-lg transition-transform hover:scale-[1.01]">
                     {{-- Order header --}}
-                    <div class="flex flex-col sm:flex-row justify-between sm:items-center mb-4">
-                        <div class="grid grid-cols-2 gap-4 w-full sm:w-1/2">
-                            <div>
-                                <p class="text-sm text-[#DDA15E]">Bestel Datum</p>
-                                <p>{{ $order->created_at->format('d M Y') }}</p>
-                            </div>
-                            <div>
-                                <p class="text-sm text-[#DDA15E]">Bestelnummer</p>
-                                <p>#{{ $order->id }}</p>
-                            </div>
-                            <div>
-                                <p class="text-sm text-[#DDA15E]">Totaal Aantal</p>
-                                <p>{{ $order->orderItems->sum('amount') }}</p>
-                            </div>
-                            <div>
-                                <p class="text-sm text-[#DDA15E]">Totale Prijs</p>
-                                <p>€{{ number_format($order->orderItems->sum(function($item) {
-                                    return $item->amount * $item->product->price;
-                                }), 2) }}</p>
-                            </div>
+                    <div class="flex justify-between items-center mb-4 pb-2 border-b border-[#DDA15E]">
+                        <h2 class="text-xl font-semibold">Bestelnummer: #{{ $order->id }}</h2>
+                        <p class="text-sm">Besteld op: {{ $order->created_at->format('d M Y') }}</p>
+                    </div>
+                    
+                    {{-- Order summary --}}
+                    <div class="mb-4 flex flex-row items-center gap-10">
+                        <div>
+                            <p class="text-sm text-[#DDA15E]">Totaal Aantal</p>
+                            <p>{{ $order->orderItems->sum('amount') }}</p>
+                        </div>
+                        <div>
+                            <p class="text-sm text-[#DDA15E]">Totale Prijs</p>
+                            <p>€{{ number_format($order->orderItems->sum(function($item) {
+                                return $item->amount * $item->product->price;
+                            }), 2) }}</p>
                         </div>
                     </div>
                     
@@ -72,7 +68,7 @@
                     </div>
                 </div>
             @else
-                {{-- Single-item order styling (original) --}}
+                {{-- Single-item order --}}
                 <div class="bg-[#606C38] flex flex-col sm:flex-row text-[#FEFAE0] rounded-lg w-full max-w-4xl h-auto mb-6 p-4 gap-4 shadow-lg transition-transform hover:scale-[1.01]">
                     {{-- order img --}}
                     <div class="flex-shrink-0">
@@ -128,11 +124,11 @@
                 </div>
             @endif
         @empty
-            <div class="bg-[#606C38] rounded-lg p-8 text-center">
-                <p class="text-[#FEFAE0] text-lg">You have no orders yet.</p>
-                <a href="{{ route('products.index') }}" class="mt-4 inline-block bg-[#DDA15E] text-[#FEFAE0] px-4 py-2 rounded-lg hover:bg-[#BC6C25] transition-colors">
-                    Browse Products
-                </a>
+            <div class="text-center">
+                <p class="text-lg">U heeft nog geen bestellingen.</p>
+                <button class="w-48 bg-[#DDA15E] hover:bg-[#BC6C25] text-[#FEFAE0] py-3 rounded-md font-bold transition-all ease-in-out">
+                    <a href="{{route('store.index')}}" class="flex justify-center items-center gap-2"><i class="fa-solid fa-circle-arrow-left"></i>Naar de webshop</a>
+                </button>
             </div>
         @endforelse
         
