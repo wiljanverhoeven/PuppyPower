@@ -62,6 +62,11 @@ class User extends Authenticatable
         return $this->hasMany(MyTraining::class, 'user_id');
     }
 
+    public function myModules()
+    {
+        return $this->hasMany(MyModule::class);
+    }
+
     public function trainings()
     {
         return $this->belongsToMany(Training::class, 'mytrainings', 'user_id', 'training_id');

@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\TrainingController as AdminTrainingController;
 use App\Http\Controllers\Admin\ModuleController as AdminModuleController;
 use App\Http\Controllers\Admin\MediaController as AdminMediaController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
+use App\Http\Controllers\Admin\UserController as AdminUserController;
 
 Route::get('/', function () {
     return view('home');
@@ -91,6 +92,14 @@ Route::prefix('admin')->name('admin.')->group(function () {
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
     Route::resource('availability', AvailabilityController::class)->except(['show']);
 });
+
+// Admin user routes
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::resource('users', AdminUserController::class);
+});
+
+Route::get('/admin/users/{user}/checkprogress', [AdminUserController::class, 'checkProgress'])->name('admin.users.checkprogress');
+
 
 // Auth
 Route::middleware('auth')->group(function () {

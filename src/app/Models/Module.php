@@ -20,7 +20,7 @@ class Module extends Model
 
     public function training()
     {
-        return $this->belongsTo(Training::class);
+        return $this->belongsTo(Training::class, 'training_id', 'training_id');
     }
 
     public function media()
