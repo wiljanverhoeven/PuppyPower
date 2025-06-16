@@ -9,7 +9,7 @@ return new class extends Migration {
             Schema::create('orders', function (Blueprint $table) {
             $table->id('id');
             $table->unsignedBigInteger('user_id')->nullable();
-            $table->double('totaal_prijs', 8, 2);
+            $table->double('total_price', 8, 2);
             $table->timestamps();
         });
     }

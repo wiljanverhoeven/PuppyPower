@@ -9,6 +9,7 @@ class ProductController extends Controller
 {
     public function index(Request $request)
     {
+        //get products
         $query = Product::query();
 
         if ($request->filled('search')) {
@@ -27,7 +28,7 @@ class ProductController extends Controller
             $query->where('price', '<=', $request->max_price);
         }
 
-        $products = $query->paginate(10);
+        $products = $query->paginate(10); 
         $categories = Product::select('category')->distinct()->pluck('category');
 
         return view('store.index', compact('products', 'categories'));

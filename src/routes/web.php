@@ -8,6 +8,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TrainingController;
 use App\Http\Controllers\MytrainingsController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\DagopvangController;
 use App\Http\Controllers\Admin\AvailabilityController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Admin\OrderController as adminOrderController;
@@ -15,10 +16,12 @@ use App\Http\Controllers\Admin\TrainingController as AdminTrainingController;
 use App\Http\Controllers\Admin\ModuleController as AdminModuleController;
 use App\Http\Controllers\Admin\MediaController as AdminMediaController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
+use App\Http\Controllers\Admin\UserController as AdminUserController;
 
 Route::get('/', function () {
     return view('home');
 })->name('home');
+
 // Contact form routes
 Route::get('/contact', function () {
     return view('contact');
@@ -37,6 +40,15 @@ Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::post('/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
 Route::post('/cart/update/{product}', [CartController::class, 'update'])->name('cart.update');
 Route::post('/cart/remove/{product}', [CartController::class, 'remove'])->name('cart.remove');
+
+// Dagopvang routes
+Route::get('/dagopvang', [DagopvangController::class, 'index'])->name('dagopvang.index');
+Route::get('/dagopvang/afspraak', [DagopvangController::class, 'create'])->name('dagopvang.create');
+Route::post('/dagopvang', [DagopvangController::class, 'store'])->name('dagopvang.store');
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
 // Training page routes
 Route::get ('/training', [TrainingController::class, 'index']) ->name('trainings');
@@ -82,15 +94,18 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::resource('availability', AvailabilityController::class)->except(['show']);
 });
 
-//user dashboard
-Route::get('/dashboard', [DashboardController::class, 'index'])
-    ->middleware(['auth'])
-    ->name('dashboard');
+// Admin user routes
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::resource('users', AdminUserController::class);
+});
+
+Route::get('/admin/users/{user}/checkprogress', [AdminUserController::class, 'checkProgress'])->name('admin.users.checkprogress');
+
 
 // Auth
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name(name: 'profile.update');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
