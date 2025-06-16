@@ -21,13 +21,13 @@
                             <tr class="transition-colors duration-200">
                                 <td class="px-6 py-4 whitespace-nowrap text-[#FEFAE0] font-medium">{{ $order->id }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap text-[#FEFAE0]">{{ $order->user_id ?? 'Gast' }}</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-[#FEFAE0] font-bold">€ {{ number_format($order->totaal_prijs, 2, ',', '.') }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-[#FEFAE0] font-bold">€ {{ number_format($order->total_price, 2, ',', '.') }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap text-[#FEFAE0]">{{ $order->created_at->format('d-m-Y H:i') }}</td>
                                 <td class="px-6 py-4 text-[#FEFAE0]">
                                     <ul class="space-y-1">
                                         @foreach ($order->orderItems as $item)
                                             <li class="text-sm">
-                                                Product ID: {{ $item->product_id }} - Aantal: {{ $item->amount }} - Prijs p.st: €{{ number_format($item->prijs, 2, ',', '.') }}
+                                                Product ID: {{ $item->product_id }} - Aantal: {{ $item->amount }} - Prijs p.st: €{{ number_format($item->price, 2, ',', '.') }}
                                             </li>
                                         @endforeach
                                     </ul>
