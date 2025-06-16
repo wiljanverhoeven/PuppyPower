@@ -16,10 +16,10 @@ class AvailabilityController extends Controller
         $events = $availabilities->map(function ($a) {
             return [
                 'id' => $a->id,
-                'title' => 'Beschikbaar',  // geen onderscheid meer op type
+                'title' => 'Beschikbaar',
                 'start' => $a->date . 'T' . $a->start_time,
                 'end' => $a->date . 'T' . $a->end_time,
-                'color' => '#28a745',      // vaste kleur
+                'color' => '#28a745', 
                 'borderColor' => '#1e7e34',
                 'allDay' => false,
                 'extendedProps' => [
