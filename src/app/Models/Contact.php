@@ -13,7 +13,8 @@ class Contact extends Model
         'name',
         'email',
         'phone',
-        'message',
+        'subject',
+        'message'
     ];
     protected $casts = [
         'created_at' => 'datetime',

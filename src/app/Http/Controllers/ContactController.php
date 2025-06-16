@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Contact;
 use App\Http\Requests\StoreContactRequest;
 use App\Http\Requests\UpdateContactRequest;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Config;
+use App\Mail\ContactMessageMail;
 
 class ContactController extends Controller
 {
@@ -29,25 +32,35 @@ class ContactController extends Controller
      */
     public function store()
     {
-        // Validate submitted data
         $validated = request()->validate([
             'name' => 'required|string|max:255',
+            'lastname' => 'required|string|max:255',
             'email' => 'required|email|max:255',
             'phone' => 'nullable|string|max:20',
             'subject' => 'required|string|max:255',
             'message' => 'required|string|max:5000',
         ]);
 
-        // Create the ticket
-        $contact = new Contact();
-        $contact->name = $validated['name'];
-        $contact->email = $validated['email'];
-        $contact->phone = $validated['phone'] ?? null;
-        $contact->subject = $validated['subject'];
-        $contact->message = $validated['message'];
-        $contact->save();
+        // Save to DB if desired
+        Contact::create($validated);
 
-        return redirect()->route('contact')->with('success', 'Your message has been sent successfully.');
+        // Manually override mail config
+        Config::set('mail.mailers.smtp', [
+            'transport' => 'smtp',
+            'host' => 'smtp.mailtrap.io',
+            'port' => 2525,
+            'encryption' => 'tls',
+            'username' => 'your-username',
+            'password' => 'your-password',
+        ]);
+
+        Config::set('mail.from.address', 'no-reply@example.com');
+        Config::set('mail.from.name', 'Contactformulier');
+
+        // Send mail
+        Mail::to('admin@example.com')->send(new ContactMessageMail($validated));
+
+        return redirect()->route('contact')->with('success', 'Je bericht is succesvol verzonden!');
     }
 
     /**
