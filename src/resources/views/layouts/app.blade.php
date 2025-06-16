@@ -174,7 +174,7 @@
             <div>
                 <a href="{{ url('/contact') }}" class="hover:text-[#DDA15E] transition-all duration-150">Contact</a>
                 <span class="mx-2">|</span>
-                <a href="{{ url('/') }}" class="hover:text-[#DDA15E] transition-all duration-150">Privacy Policy</a>
+                <a href="{{ url('privacy-policy') }}" class="hover:text-[#DDA15E] transition-all duration-150">Privacy Policy</a>
             </div>
             <div class="flex flex-row justify-between">
                 {{-- Social Media Links --}}

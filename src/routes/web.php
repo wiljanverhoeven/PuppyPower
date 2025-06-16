@@ -27,6 +27,11 @@ Route::get('/contact', function () {
     return view('contact');
 })->name('contact');
 
+// privacy policy route
+Route::get('/privacy-policy', function () {
+    return view('privacy-policy');
+})->name('privacy-policy');
+
 Route::post('/contact', [ContactController::class, 'store'])
     ->name('contact.store');
 
