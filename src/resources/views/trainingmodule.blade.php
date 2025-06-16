@@ -6,15 +6,12 @@
         </div>
 
         <div class="space-y-6 flex flex-col items-center justify-center">
-            @foreach ($medias as $index => $media)
+            {{-- @foreach ($medias as $index => $media) --}}
                 <div class="bg-[#606C38] rounded-lg shadow-lg overflow-hidden w-2/3">
+                    @foreach ($medias as $index => $media)
                     <div class="p-6">
                         <div class="flex items-center justify-between mb-4">
                             <h2 class="text-2xl font-semibold text-[#FEFAE0]">{{ $media->title }}</h2>
-                            <span class="bg-[#DDA15E] text-[#FEFAE0] px-3 py-1 rounded-full text-sm">
-                               {{-- changed the way the steps are displayed, because the way it's ordered is dumb --}}
-                                Stap {{ $index + 1 }} 
-                            </span>
                         </div>
                         
                         @if($media->description)
@@ -48,8 +45,9 @@
                             @endif
                         </div>
                     </div>
+                    @endforeach
                 </div>
-            @endforeach
+            
         </div>
 
         <div class="mt-8 text-center">
